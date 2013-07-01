@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-06-26T23:31:24Z" product-name="in_news">
+		<header/>
+		<body>
+
+			<trans-unit id="tx_innews_domain_model_news" approved="yes">
+				<source>News</source> <target state="translated">Actualités</target></trans-unit>
+			
+		</body>
+	</file>
+</xliff>

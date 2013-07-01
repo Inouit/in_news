@@ -1,0 +1,38 @@
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+	</meta>
+
+	<sheets>
+		<sDEF>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.sheet_title</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<!-- View -->
+					<switchableControllerActions>
+						<TCEforms>
+						<label>LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.display</label>
+						<!--onChange>reload</onChange-->
+						<config>
+							<type>select</type>
+							<items>
+								<numIndex index="1">
+									<numIndex index="0">LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.display.news_list</numIndex>
+									<numIndex index="1">News->list</numIndex>
+								</numIndex>
+								<numIndex index="2">
+									<numIndex index="0">LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.display.cat_list</numIndex>
+									<numIndex index="1">Category->list</numIndex>
+								</numIndex>
+							</items>
+						</config>
+						</TCEforms>
+					</switchableControllerActions>
+				</el>
+			</ROOT>
+		</sDEF>
+	</sheets>
+</T3DataStructure>

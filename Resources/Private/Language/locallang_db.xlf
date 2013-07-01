@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-06-26T23:31:24Z" product-name="in_news">
+		<header/>
+		<body>
+
+			<trans-unit id="tx_innews_domain_model_news">
+				<source>News</source>
+			</trans-unit>
+			
+			<trans-unit id="tx_innews_domain_model_category.list_page">
+				<source>Page used for listing</source>
+			</trans-unit>
+			
+
+			<trans-unit id="tx_innews_news.informations">
+				<source>News informations</source>
+			</trans-unit>
+			<trans-unit id="tx_innews_news.teaser">
+				<source>Teaser</source>
+			</trans-unit>
+			<trans-unit id="tx_innews_event.dates">
+				<source>Event dates</source>
+			</trans-unit>
+			<trans-unit id="tx_innews_event.informations">
+				<source>Event informations</source>
+			</trans-unit>
+			<trans-unit id="tx_innews_event.from">
+				<source>Start of the event</source>
+			</trans-unit>
+			<trans-unit id="tx_innews_event.to">
+				<source>End of the event</source>
+			</trans-unit>
+			<trans-unit id="tx_innews_event.where">
+				<source>Location of the event</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

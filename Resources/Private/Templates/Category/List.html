@@ -1,0 +1,23 @@
+{namespace in=Tx_InNews_ViewHelpers}
+
+<f:if condition="{categories}">
+	<f:then>
+		<f:render section="categoryList" arguments="{categories:categories}"/>
+	</f:then>
+</f:if>
+
+	
+<f:section name="categoryList">
+	<ul>
+		<f:for each="{categories}" as="category">
+			<li>
+				<f:link.page pageUid="{category.relatedPage}" additionalParams="{tx_innews_pi1:{category:category}}">{category.title}</f:link.page>
+				<f:if condition="{category.children}">
+					<f:then>
+						<f:render section="categoryList" arguments="{categories:category.children}"/>
+					</f:then>
+				</f:if>
+			</li>
+		</f:for>
+	</ul>
+</f:section>

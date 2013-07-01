@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-06-26T23:31:24Z" product-name="in_news">
+		<header/>
+		<body>
+
+			<trans-unit id="tx_innews_domain_model_news" approved="yes">
+				<source>News</source> <target state="translated">Actualités</target></trans-unit>
+			
+			<trans-unit id="tx_innews_domain_model_category.list_page" approved="yes">
+				<source>Page used for listing</source>
+			<target state="translated">Page de listing des actualités</target></trans-unit>
+			
+
+			<trans-unit id="tx_innews_news.informations" approved="yes">
+				<source>News informations</source>
+			<target state="translated">Informations sur l'actualité</target></trans-unit>
+			<trans-unit id="tx_innews_news.teaser" approved="yes">
+				<source>Teaser</source>
+			<target state="translated">Chapô</target></trans-unit>
+			<trans-unit id="tx_innews_event.dates" approved="yes">
+				<source>Event dates</source>
+			<target state="translated">Dates de l'événement</target></trans-unit>
+			<trans-unit id="tx_innews_event.informations" approved="yes">
+				<source>Event informations</source>
+			<target state="translated">Informations sur l'événement</target></trans-unit>
+			<trans-unit id="tx_innews_event.from" approved="yes">
+				<source>Start of the event</source>
+			<target state="translated">Début de l'événement</target></trans-unit>
+			<trans-unit id="tx_innews_event.to" approved="yes">
+				<source>End of the event</source>
+			<target state="translated">Fin de l'événement</target></trans-unit>
+			<trans-unit id="tx_innews_event.where" approved="yes">
+				<source>Location of the event</source>
+			<target state="translated">Lieu de l'événement</target></trans-unit>
+		</body>
+	</file>
+</xliff>

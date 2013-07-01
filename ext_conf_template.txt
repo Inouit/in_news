@@ -1,0 +1,2 @@
+# cat=basic/int; type=int; label=LLL:EXT:in_news/Resources/Private/Language/locallang_be.xml:newsDoktype
+newsDoktype = 180
