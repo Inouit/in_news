@@ -6,6 +6,7 @@ plugin.tx_innews {
     }
     persistence {
         storagePid = {$plugin.tx_innews.persistence.storagePid}
+        
         classes{
             Inouit\InNews\Domain\Model\News {
                 mapping {
@@ -24,6 +25,7 @@ plugin.tx_innews {
                     tableName = sys_category
                     columns {
                         title.mapOnProperty = title
+                        tx_innews_category_list_page.mapOnProperty = listPage
                     }
                 }
             }
@@ -33,5 +35,8 @@ plugin.tx_innews {
     features {
         # uncomment the following line to enable the new Property Mapper.
         # rewrittenPropertyMapper = 1
+    }
+    settings {
+        listPage = {$plugin.tx_innews.settings.listPage}
     }
 }

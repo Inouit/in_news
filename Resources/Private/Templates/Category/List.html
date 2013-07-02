@@ -11,7 +11,7 @@
 	<ul>
 		<f:for each="{categories}" as="category">
 			<li>
-				<f:link.page pageUid="{category.relatedPage}" additionalParams="{tx_innews_pi1:{category:category}}">{category.title}</f:link.page>
+				<in:link.category pageUid="{category.listPage}" category="{category}" additionalParams="{tx_innews_pi1:{category:category}}">{category.title}</in:link.category>
 				<f:if condition="{category.children}">
 					<f:then>
 						<f:render section="categoryList" arguments="{categories:category.children}"/>

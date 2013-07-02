@@ -44,6 +44,12 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
     protected $children;
 
+    /**
+     * @var integer
+     */
+    protected $listPage;
+
+
 
     /**
      * Getter for title
@@ -85,6 +91,27 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     public function setChildren($children)
     {
         $this->children = $children;
+    }
+
+    /**
+     * Getter for listPage
+     *
+     * @return mixed
+     */
+    public function getListPage()
+    {
+        return $this->listPage;
+    }
+    
+    /**
+     * Setter for listPage
+     *
+     * @param mixed $listPage Value to set
+     * @return self
+     */
+    public function setListPage($listPage)
+    {
+        $this->listPage = $listPage;
     }
 }
 ?>

@@ -26,50 +26,52 @@ namespace Inouit\InNews\Controller;
  ***************************************************************/
 
 /**
- *
- *
  * @package in_news
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class NewsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
-	/**
-	 * categoryRepository
-	 *
-	 * @var \Inouit\InNews\Domain\Repository\CategoryRepository
-	 * @inject
-	 */
-	protected $categoryRepository;
+class NewsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+{
 
-	/**
-	 * newsRepository
-	 *
-	 * @var \Inouit\InNews\Domain\Repository\NewsRepository
-	 * @inject
-	 */
-	protected $newsRepository;
+    /**
+     * categoryRepository
+     *
+     * @var \Inouit\InNews\Domain\Repository\CategoryRepository
+     * @inject
+     */
+    protected $categoryRepository;
 
-	/**
-	 * 
-	 * @return void
-	 */
-	public function listAction() {
-		if($this->request !== null) {
-			$args = $this->request->getArguments();
-			$categoryUid = $args['category'];
-			
-			if($categoryUid !==null && !empty($categoryUid)){
-				$category = $this->categoryRepository->findOneByUid($categoryUid);
-				$news = $this->newsRepository->findByCategory($category);
-				
-				$this->view->assign('requestedCategory', $category);
-			}else{
-				$news = $this->newsRepository->findAll();
-			}
-		}
-		$this->view->assign('news', $news);
-	}
+    /**
+     * newsRepository
+     *
+     * @var \Inouit\InNews\Domain\Repository\NewsRepository
+     * @inject
+     */
+    protected $newsRepository;
+
+    /**
+     * listAction
+     *
+     * @return void
+     */
+    public function listAction()
+    {
+        if ($this->request !== null) {
+            $args = $this->request->getArguments();
+            $categoryUid = $args['category'];
+            
+            if ($categoryUid !==null && !empty($categoryUid)) {
+                $category = $this->categoryRepository->findOneByUid($categoryUid);
+                $news = $this->newsRepository->findByCategory($category);
+                
+                $this->view->assign('requestedCategory', $category);
+            } else {
+                $news = $this->newsRepository->findAll();
+            }
+        }
+        $this->view->assign('news', $news);
+    }
 
 }
 ?>

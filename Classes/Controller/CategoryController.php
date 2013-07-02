@@ -26,31 +26,31 @@ namespace Inouit\InNews\Controller;
  ***************************************************************/
 
 /**
- *
- *
- * @package in_news
+ * @package InNews
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class CategoryController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
-	/**
-	 * categoryRepository
-	 *
-	 * @var \Inouit\InNews\Domain\Repository\CategoryRepository
-	 * @inject
-	 */
-	protected $categoryRepository;
+class CategoryController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+{
+    /**
+     * categoryRepository
+     *
+     * @var \Inouit\InNews\Domain\Repository\CategoryRepository
+     * @inject
+     */
+    protected $categoryRepository;
 
-	/**
-	 * action list
-	 *
-	 * @return void
-	 */
-	public function listAction() {
-		$categories = $this->categoryRepository->findAllRecursivly();
-		$this->view->assign('categories', $categories);
-	}
+    /**
+     * action list
+     *
+     * @return void
+     */
+    public function listAction() 
+    {
+        $categories = $this->categoryRepository->findAllRecursivly();
+        $this->view->assign('categories', $categories);
+    }
 
 }
 ?>
