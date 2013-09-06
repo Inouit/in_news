@@ -42,7 +42,7 @@ class Tx_InNews_ViewHelpers_Link_CategoryViewHelper extends Tx_Fluid_Core_ViewHe
     */
     public function initializeArguments() {
      $this->registerUniversalTagAttributes();
-     $this->registerTagAttribute('category', '\Inouit\InNews\Classes\Model\Category', 'Category to link', false);
+     $this->registerTagAttribute('category', '\Inouit\InNews\Classes\Model\Category', 'Category to link', true);
     }
 
     /**
@@ -61,7 +61,7 @@ class Tx_InNews_ViewHelpers_Link_CategoryViewHelper extends Tx_Fluid_Core_ViewHe
      * @return string Rendered page URI
      * @throws \InvalidArgumentException
      */
-    public function render($pageUid = null, array $additionalParams = array(), $pageType = 0, $noCache = false, $noCacheHash = false, $section = '', $linkAccessRestrictedPages = false, $absolute = false, $addQueryString = false, array $argumentsToBeExcludedFromQueryString = array()) 
+    public function render($pageUid = null, array $additionalParams = array(), $pageType = 0, $noCache = false, $noCacheHash = false, $section = '', $linkAccessRestrictedPages = false, $absolute = false, $addQueryString = false, array $argumentsToBeExcludedFromQueryString = array())
     {
         $settings = $this->templateVariableContainer->get('settings');
 
@@ -74,20 +74,34 @@ class Tx_InNews_ViewHelpers_Link_CategoryViewHelper extends Tx_Fluid_Core_ViewHe
                 if(is_int($this->arguments['category']->getListPage())) {
                     $newPageUid = $this->arguments['category']->getListPage();
                 }
-            }
-        }
 
-        if(!$newPageUid) {
-            $pageUid = $settings['listPage'];
+                $additionalParams['tx_innews_pi1']['category'] = $this->arguments['category']->getUid();
+            }
         }
 
         if($newPageUid) {
             $pageUid = $newPageUid;
+        }elseif($settings['listPage']) {
+            $pageUid = $settings['listPage'];
+        }elseif(!$pageUid) {
+            $pageUid = $GLOBALS['TSFE']->id;
         }
 
         $uriBuilder = $this->controllerContext->getUriBuilder();
-        $uri = $uriBuilder->reset()->setTargetPageUid($pageUid)->setTargetPageType($pageType)->setNoCache($noCache)->setUseCacheHash(!$noCacheHash)->setSection($section)->setLinkAccessRestrictedPages($linkAccessRestrictedPages)->setArguments($additionalParams)->setCreateAbsoluteUri($absolute)->setAddQueryString($addQueryString)->setArgumentsToBeExcludedFromQueryString($argumentsToBeExcludedFromQueryString)->build();
+        $uri = $uriBuilder->reset()->setTargetPageUid($pageUid)
+                    ->setTargetPageType($pageType)
+                    ->setNoCache($noCache)
+                    ->setUseCacheHash(!$noCacheHash)
+                    ->setSection($section)
+                    ->setLinkAccessRestrictedPages($linkAccessRestrictedPages)
+                    ->setArguments($additionalParams)
+                    ->setCreateAbsoluteUri($absolute)
+                    ->setAddQueryString($addQueryString)
+                    ->setArgumentsToBeExcludedFromQueryString($argumentsToBeExcludedFromQueryString)
+                    ->build();
+
         $this->tag->addAttribute('href', $uri);
+        $this->tag->removeAttribute('category');
         $this->tag->setContent($this->renderChildren());
         return $this->tag->render();
     }

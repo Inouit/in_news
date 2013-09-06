@@ -3,13 +3,13 @@
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
 
-.. include:: Includes.txt
+.. include:: ../Includes.txt
 
 
 .. _start:
 
 =============================================================
-News
+News (Français)
 =============================================================
 
 .. only:: html
@@ -20,42 +20,42 @@ News
 	:Version:
 		|release|
 
-	:Language:
-		en
+	:Langue:
+		fr
 
 	:Description:
-		enter description.
+		entrez une description.
 
-	:Keywords:
-		comma,separated,list,keywords
+	:Mots-clés:
+		list,mots-clés,séparés,par,virgules
 
 	:Copyright:
 		2013
 
-	:Author:
+	:Auteur:
 		Grégory Copin
 
-	:Email:
+	:E-mail:
 		author@example.com
 
-	:License:
-		This document is published under the Open Content License
-		available from http://www.opencontent.org/opl.shtml
+	:Licence:
+		Ce document est publié sous la licence de contenu libre
+		disponible sur http://www.opencontent.org/opl.shtml
 
-	:Rendered:
+	:Généré:
 		|today|
 
-	The content of this document is related to TYPO3,
-	a GNU/GPL CMS/Framework available from `www.typo3.org <http://www.typo3.org/>`_.
+	Le contenu de ce document est en relation avec TYPO3,
+	un CMS/Framework GNU/GPL disponible sur `www.typo3.org <http://www.typo3.org/>`_.
 
 
-	**Table of Contents**
+	**Sommaire**
 
 .. toctree::
 	:maxdepth: 5
 	:titlesonly:
 	:glob:
 
-	Introduction/Index
-	UserManual/Index
-	AdministratorManual/Index
+..	Introduction/Index
+..	UserManual/Index
+..	AdministratorManual/Index

@@ -5,12 +5,12 @@
 		<body>
 
 			<trans-unit id="tx_innews_domain_model_news" approved="yes">
-				<source>News</source> <target state="translated">Actualités</target></trans-unit>
-			
+				<source>News</source> <target state="translated">Actualité</target></trans-unit>
+
 			<trans-unit id="tx_innews_domain_model_category.list_page" approved="yes">
 				<source>Page used for listing</source>
 			<target state="translated">Page de listing des actualités</target></trans-unit>
-			
+
 
 			<trans-unit id="tx_innews_news.informations" approved="yes">
 				<source>News informations</source>

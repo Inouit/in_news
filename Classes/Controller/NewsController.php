@@ -5,7 +5,7 @@ namespace Inouit\InNews\Controller;
  *  Copyright notice
  *
  *  (c) 2013 Grégory Copin <gcopin@inouit.com>, Inouit
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -60,16 +60,17 @@ class NewsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         if ($this->request !== null) {
             $args = $this->request->getArguments();
             $categoryUid = $args['category'];
-            
+
             if ($categoryUid !==null && !empty($categoryUid)) {
                 $category = $this->categoryRepository->findOneByUid($categoryUid);
                 $news = $this->newsRepository->findByCategory($category);
-                
+
                 $this->view->assign('requestedCategory', $category);
             } else {
                 $news = $this->newsRepository->findAll();
             }
         }
+
         $this->view->assign('news', $news);
     }
 
