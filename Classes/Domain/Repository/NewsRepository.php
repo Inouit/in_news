@@ -33,7 +33,13 @@ use Inouit\InNews\Domain\Model\Category;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
+use \TYPO3\CMS\Extbase\Persistence\QueryInterface;
+
 class NewsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+
+	 protected $defaultOrderings = array(
+	 	'crdate' => QueryInterface::ORDER_ASCENDING
+	);
 
 	/**
 	 * Override default createQuery
@@ -58,15 +64,29 @@ class NewsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		return $query;
 	}
 
+	public function findAll($orderDirection = null) {
+		$query = $this->createQuery();
+
+		if($orderDirection !== null) {
+			$query->setOrderings(array('crdate' => $orderDirection));
+		}
+
+		return $query->execute();
+	}
+
 	/**
 	 * @param Category $category
 	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
 	 */
-	public function findByCategory(Category $category) {
+	public function findByCategory(Category $category, $orderDirection = null) {
 		$query = $this->createQuery();
 		$query->matching(
 			$query->contains('category', $category)
 		);
+
+		if($orderDirection !== null) {
+			$query->setOrderings(array('crdate' => $orderDirection));
+		}
 
 		return $query->execute();
 	}

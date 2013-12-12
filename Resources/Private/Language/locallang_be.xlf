@@ -6,7 +6,8 @@
 			<trans-unit id="flexform.sheet_title"><source>Settings</source></trans-unit>
 			<trans-unit id="flexform.display"><source>Display</source></trans-unit>
 			<trans-unit id="flexform.display.cat_list"><source>Categories list</source></trans-unit>
-			<trans-unit id="flexform.display.news_list"><source>News list</source></trans-unit>
+			<trans-unit id="flexform.display.news_list_chrono"><source>News list by chronological order</source></trans-unit>
+			<trans-unit id="flexform.display.news_list_ante_chrono"><source>News list by ante chronological order</source></trans-unit>
 		</body>
 	</file>
 </xliff>

@@ -51,27 +51,46 @@ class NewsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     protected $newsRepository;
 
     /**
-     * listAction
+     * listChronoAction
      *
      * @return void
      */
-    public function listAction()
+    public function listChronoAction()
     {
+        $news = $this->insertCategoryFilter();
+        $this->view->assign('news', $news);
+    }
+
+    /**
+     * listAnteChronoAction
+     *
+     * @return void
+     */
+    public function listAnteChronoAction()
+    {
+        $news = $this->insertCategoryFilter(\TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING);
+        $this->view->assign('news', $news);
+    }
+
+    /**
+     * Insert category filter in list view
+     * @return ArrayCollection news list
+     */
+    protected function insertCategoryFilter($orderDirection = null) {
         if ($this->request !== null) {
             $args = $this->request->getArguments();
             $categoryUid = $args['category'];
 
             if ($categoryUid !==null && !empty($categoryUid)) {
                 $category = $this->categoryRepository->findOneByUid($categoryUid);
-                $news = $this->newsRepository->findByCategory($category);
-
                 $this->view->assign('requestedCategory', $category);
-            } else {
-                $news = $this->newsRepository->findAll();
+
+                return $this->newsRepository->findByCategory($category, $orderDirection);
+
             }
         }
 
-        $this->view->assign('news', $news);
+        return $this->newsRepository->findAll($orderDirection);
     }
 
 }
