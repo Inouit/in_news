@@ -5,7 +5,7 @@ namespace Inouit\InNews\Domain\Repository;
  *  Copyright notice
  *
  *  (c) 2013 Grégory Copin <gcopin@inouit.com>, Inouit
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -43,7 +43,7 @@ class NewsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 */
 	public function createQuery() {
 		$query = parent::createQuery();
-		
+
 		//filter by doktype
 		$extConf = $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['in_news'];
 		if($extConf !== null) {
@@ -66,6 +66,21 @@ class NewsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		$query = $this->createQuery();
 		$query->matching(
 			$query->contains('category', $category)
+		);
+
+		return $query->execute();
+	}
+
+	/**
+	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 */
+	public function findFutureEvents() {
+		$query = $this->createQuery();
+		$query->matching(
+			$query->greaterThanOrEqual('tx_innews_news_event_to', time())
+		);
+		$query->matching(
+			$query->lessThanOrEqual('tx_innews_news_event_from', time())
 		);
 
 		return $query->execute();

@@ -6,7 +6,9 @@
 			<trans-unit id="flexform.sheet_title" approved="yes"><source>Settings</source><target state="translated">Paramètres</target></trans-unit>
 			<trans-unit id="flexform.display" approved="yes"><source>Display</source><target state="translated">Affichage</target></trans-unit>
 			<trans-unit id="flexform.display.cat_list" approved="yes"><source>Categories list</source><target state="translated">Liste des catégories</target></trans-unit>
-			<trans-unit id="flexform.display.news_list" approved="yes"><source>News list</source><target state="translated">Liste d'actualités</target></trans-unit>
+      <trans-unit id="flexform.display.news_list" approved="yes"><source>News list</source><target state="translated">Liste d'actualités</target></trans-unit>
+      <trans-unit id="flexform.display.news_list_future_event" approved="yes"><source>Future events list</source><target state="translated">Liste des futurs événements</target></trans-unit>
+			<trans-unit id="flexform.includeOngoingEvents" approved="yes"><source>Include ongoing events</source><target state="translated">Include les événements en cours</target></trans-unit>
 		</body>
 	</file>
 </xliff>

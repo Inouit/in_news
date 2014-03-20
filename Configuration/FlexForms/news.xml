@@ -24,6 +24,10 @@
 									<numIndex index="1">News->list</numIndex>
 								</numIndex>
 								<numIndex index="2">
+									<numIndex index="0">LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.display.news_list_future_event</numIndex>
+									<numIndex index="1">News->listFutureEvent</numIndex>
+								</numIndex>
+								<numIndex index="3">
 									<numIndex index="0">LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.display.cat_list</numIndex>
 									<numIndex index="1">Category->list</numIndex>
 								</numIndex>
@@ -31,6 +35,16 @@
 						</config>
 						</TCEforms>
 					</switchableControllerActions>
+
+					<includeOngoingEvents>
+						<TCEforms>
+							<label>LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.includeOngoingEvents</label>
+							<displayCond>FIELD:switchableControllerActions:=:News->listFutureEvent</displayCond>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</includeOngoingEvents>
 				</el>
 			</ROOT>
 		</sDEF>

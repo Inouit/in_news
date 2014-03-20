@@ -9,10 +9,12 @@ plugin.tx_innews {
 	}
 	persistence {
 		# cat=plugin.tx_innews//a; type=integer; label=Default recursivity
-		recursive = 
+		recursive =
 	}
 	settings {
 		# cat=plugin.tx_innews//a; type=integer; label=Listing page for news
-		listPage = 
+		listPage =
+		# cat=plugin.tx_innews//a; type=integer; label=Include ongoin events in future events list
+		includeOngoingEvents =
 	}
 }
