@@ -12,11 +12,11 @@ plugin.tx_innews {
                 mapping {
                     tableName = pages
                     columns {
-                        tx_innews_news_category.mapOnProperty = category
+                        tx_innews_news_top.mapOnProperty = top
                         tx_innews_news_teaser.mapOnProperty = teaser
-                        tx_innews_news_event_from.mapOnProperty = from
-                        tx_innews_news_event_to.mapOnProperty = to
-                        tx_innews_news_event_where.mapOnProperty = where
+                        tx_innews_event_from.mapOnProperty = from
+                        tx_innews_event_to.mapOnProperty = to
+                        tx_innews_event_further.mapOnProperty = further
                     }
                 }
             }

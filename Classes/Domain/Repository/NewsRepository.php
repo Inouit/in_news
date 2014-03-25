@@ -77,10 +77,10 @@ class NewsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	public function findFutureEvents() {
 		$query = $this->createQuery();
 		$query->matching(
-			$query->greaterThanOrEqual('tx_innews_news_event_to', time())
+			$query->greaterThanOrEqual('tx_innews_event_to', time())
 		);
 		$query->matching(
-			$query->lessThanOrEqual('tx_innews_news_event_from', time())
+			$query->lessThanOrEqual('tx_innews_event_from', time())
 		);
 
 		return $query->execute();
