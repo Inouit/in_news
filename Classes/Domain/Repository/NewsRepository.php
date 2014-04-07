@@ -90,5 +90,20 @@ class NewsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 		return $query->execute();
 	}
+
+	/**
+	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 */
+	public function findFutureEvents() {
+		$query = $this->createQuery();
+		$query->matching(
+			$query->greaterThanOrEqual('tx_innews_event_to', time())
+		);
+		$query->matching(
+			$query->lessThanOrEqual('tx_innews_event_from', time())
+		);
+
+		return $query->execute();
+	}
 }
 ?>

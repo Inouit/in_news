@@ -1,0 +1,11 @@
+<f:layout name="Default" />
+<f:section name="main">
+
+<f:flashMessages />
+<f:if condition="{news -> f.count()}">
+	<f:for each="{news}" as="newsItem">
+		<f:render partial="List/Item" arguments="{newsItem: newsItem, settings:settings}" />
+	</f:for>
+</f:if>
+
+</f:section>

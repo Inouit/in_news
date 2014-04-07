@@ -51,46 +51,88 @@ class NewsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     protected $newsRepository;
 
     /**
-     * listChronoAction
+     * listAction
      *
      * @return void
      */
-    public function listChronoAction()
+    public function listAction()
     {
-        $news = $this->insertCategoryFilter();
-        $this->view->assign('news', $news);
-    }
-
-    /**
-     * listAnteChronoAction
-     *
-     * @return void
-     */
-    public function listAnteChronoAction()
-    {
-        $news = $this->insertCategoryFilter(\TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING);
-        $this->view->assign('news', $news);
-    }
-
-    /**
-     * Insert category filter in list view
-     * @return ArrayCollection news list
-     */
-    protected function insertCategoryFilter($orderDirection = null) {
         if ($this->request !== null) {
             $args = $this->request->getArguments();
             $categoryUid = $args['category'];
 
             if ($categoryUid !==null && !empty($categoryUid)) {
                 $category = $this->categoryRepository->findOneByUid($categoryUid);
+                $news = $this->newsRepository->findByCategory($category);
+
                 $this->view->assign('requestedCategory', $category);
-
-                return $this->newsRepository->findByCategory($category, $orderDirection);
-
+            } else {
+                $news = $this->newsRepository->findAll();
             }
         }
+        $this->view->assign('news', $news);
+    }
 
-        return $this->newsRepository->findAll($orderDirection);
+    /**
+     * listFutureEventAction
+     *
+     * @return void
+     */
+    public function listFutureEventAction()
+    {
+        if ($this->request !== null) {
+            $args = $this->request->getArguments();
+            $categoryUid = $args['category'];
+
+            \TYPO3\CMS\Core\Utility\DebugUtility::debug($this->settings);
+
+            if ($categoryUid !==null && !empty($categoryUid)) {
+                $category = $this->categoryRepository->findOneByUid($categoryUid);
+                $news = $this->newsRepository->findByCategory($category);
+
+                $this->view->assign('requestedCategory', $category);
+            } else {
+                $news = $this->newsRepository->findFutureEvents();
+            }
+        }
+        $this->view->assign('news', $news);
+    }
+
+    /**
+     * @var \Tx_Extbase_Configuration_ConfigurationManagerInterface
+     */
+    protected $configurationManager;
+
+    /**
+     * Injects the Configuration Manager and is initializing the framework settings
+     * Function is used to override the merge of settings via TS & flexforms
+     *
+     * @param \Tx_Extbase_Configuration_ConfigurationManagerInterface An instance of the Configuration Manager
+     * @return void
+     */
+    public function injectConfigurationManager(\Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager) {
+        $this->configurationManager = $configurationManager;
+
+        $tsSettings = $this->configurationManager->getConfiguration(
+            \Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
+            'innews',
+            'innews_pi1'
+        );
+        $originalSettings = $this->configurationManager->getConfiguration(
+            \Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS
+        );
+        // start override
+        if (isset($tsSettings['settings']['overrideFlexformSettingsIfEmpty'])) {
+            $overrideSettings = t3lib_div::trimExplode(',', $tsSettings['settings']['overrideFlexformSettingsIfEmpty'], TRUE);
+            foreach($overrideSettings as $key) {
+                // if flexform setting is empty and value is available in TS
+                if ((!isset($originalSettings[$key]) || empty($originalSettings[$key]))
+                        && isset($tsSettings['settings'][$key])){
+                    $originalSettings[$key] = $tsSettings['settings'][$key];
+                }
+            }
+        }
+        $this->settings = $originalSettings;
     }
 
 }

@@ -8,11 +8,13 @@ plugin.tx_innews {
 		layoutRootPath = EXT:in_news/Resources/Private/Layouts/
 	}
 	persistence {
-		# cat=plugin.tx_innews//a; type=int+; label=Default storage PID
-		storagePid =
+		# cat=plugin.tx_innews//a; type=integer; label=Default recursivity
+		recursive =
 	}
 	settings {
-		# cat=plugin.tx_innews//b; type=integer; label=Listing page for news
+		# cat=plugin.tx_innews//a; type=integer; label=Listing page for news
 		listPage =
+		# cat=plugin.tx_innews//a; type=integer; label=Include ongoin events in future events list
+		includeOngoingEvents =
 	}
 }
