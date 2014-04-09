@@ -7,17 +7,26 @@
 			<trans-unit id="tx_innews_domain_model_news">
 				<source>News</source>
 			</trans-unit>
-			
+
 			<trans-unit id="tx_innews_domain_model_category.list_page">
 				<source>Page used for listing</source>
 			</trans-unit>
-			
+
 
 			<trans-unit id="tx_innews_news.informations">
 				<source>News informations</source>
 			</trans-unit>
+			<trans-unit id="tx_innews_news.top">
+				<source>Highlighted</source>
+			</trans-unit>
+			<trans-unit id="tx_innews_news.top.activate">
+				<source>Activate</source>
+			</trans-unit>
 			<trans-unit id="tx_innews_news.teaser">
 				<source>Teaser</source>
+			</trans-unit>
+			<trans-unit id="tx_innews_news.display_date">
+				<source>Display date</source>
 			</trans-unit>
 			<trans-unit id="tx_innews_event.dates">
 				<source>Event dates</source>
@@ -31,8 +40,8 @@
 			<trans-unit id="tx_innews_event.to">
 				<source>End of the event</source>
 			</trans-unit>
-			<trans-unit id="tx_innews_event.where">
-				<source>Location of the event</source>
+			<trans-unit id="tx_innews_event.further">
+				<source>Further informations</source>
 			</trans-unit>
 		</body>
 	</file>

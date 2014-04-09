@@ -5,7 +5,7 @@ namespace Inouit\InNews\Domain\Model;
  *  Copyright notice
  *
  *  (c) 2013 Grégory Copin <gcopin@inouit.com>, Inouit
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -34,16 +34,21 @@ namespace Inouit\InNews\Domain\Model;
  */
 class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
-	/**
-	 * @var string
-	 */
+    /**
+     * @var integer
+     */
+    protected $uid;
+
+    /**
+     * @var string
+     */
     protected $title;
 
 	/**
 	 * @var DateTime
 	 */
     protected $crdate;
-	
+
 	/**
 	 * @var DateTime
 	 */
@@ -56,21 +61,28 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	protected $media;
 
-	/**
-	 * @var string
-	 */
-    protected $category;
+    /**
+      * List of categories
+      *
+      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
+      */
+     protected $categories;
 
 	/**
 	 * @var string
 	 */
     protected $teaser;
-	
+
+  /**
+   * @var DateTime
+   */
+    protected $displayDate;
+
 	/**
 	 * @var DateTime
 	 */
     protected $from;
-	
+
 	/**
 	 * @var DateTime
 	 */
@@ -82,6 +94,53 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     protected $where;
 
     /**
+     * Constructs this post
+     */
+    public function __construct() {
+        $this->categories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+    }
+
+    /**
+     * Add a Category
+     *
+     * @param Tx_Inannuaire_Domain_Model_Grades $categories
+     * @return void
+     */
+    public function addCategories(Tx_Inannuaire_Domain_Model_Grades $categories) {
+        $this->categories->attach($categories);
+    }
+
+    /**
+     * Remove a Category
+     *
+     * @param Tx_Inannuaire_Domain_Model_Grades $categoriesToRemove The Grades to be removed
+     * @return void
+     */
+    public function removeCategories(Tx_Inannuaire_Domain_Model_Grades $categoriesToRemove) {
+        $this->categories->detach($categoriesToRemove);
+    }
+
+    /**
+    * Returns the Categories
+    *
+    * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage A storage holding Tx_Inannuaire_Domain_Model_Grades objects
+    */
+    public function getCategories() {
+        return $this->categories;
+    }
+
+    /**
+     * Sets the Categories
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories One or more Tx_Inannuaire_Domain_Model_Grades objects
+     * @return void
+     */
+    public function setCategories(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories) {
+        $this->categories = $categories;
+    }
+
+
+    /**
      * Getter for title
      *
      * @return mixed
@@ -90,7 +149,7 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     {
         return $this->title;
     }
-    
+
     /**
      * Setter for title
      *
@@ -164,25 +223,27 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
     /**
-     * Getter for category
+     * Getter for displayDate
      *
-     * @return \Category
+     * @return DateTime
      */
-    public function getCategory()
-    {
-        return $this->category;
+    public function getDisplayDate() {
+
+        return $this->displayDate;
     }
-    
+
+
     /**
-     * Setter for category
+     * Setter for displayDate
      *
-     * @param \Category $category Value to set
-     * @return self
+     * @param  DateTime  displayDate
+     * @return DateTime
      */
-    public function setCategory(\Category $category)
-    {
-        $this->category = $category;
+    public function setDisplayDate($displayDate) {
+        $this->displayDate = $displayDate;
+        return $this;
     }
+
 
     /**
      * Getter for teaser
@@ -193,7 +254,7 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     {
         return $this->teaser;
     }
-    
+
     /**
      * Setter for teaser
      *
@@ -252,7 +313,7 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     {
         return $this->where;
     }
-    
+
     /**
      * Setter for where
      *

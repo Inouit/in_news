@@ -26,7 +26,11 @@ $tmp_in_news_columns = array(
         'displayCond' => 'FIELD:doktype:=:'.$newsDoktype,
         'config'      => array (
             'type' => 'check',
-            'default' => 0
+                'items' => array(
+                    '1' => array(
+                        '0' => 'LLL:EXT:in_news/Resources/Private/Language/locallang_db.xlf:tx_innews_news.top.activate'
+                    )
+                )
         )
     ),
     'tx_innews_news_teaser' => array (
@@ -37,6 +41,18 @@ $tmp_in_news_columns = array(
             'type' => 'text',
             'cols' => 30,
             'rows' => 5,
+        )
+    ),
+    'tx_innews_news_display_date' => array (
+        'exclude' => 1,
+        'label' => 'LLL:EXT:in_news/Resources/Private/Language/locallang_db.xlf:tx_innews_news.display_date',
+        'displayCond' => 'FIELD:doktype:=:'.$newsDoktype,
+        'config'      => array (
+            'type'     => 'input',
+            'size'     => 8,
+            'max'      => 20,
+            'eval'     => 'date',
+            'default'  => 0,
         )
     ),
     'tx_innews_event_from' => array (
@@ -90,17 +106,14 @@ $tmp_in_news_columns = array(
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('pages',$tmp_in_news_columns);
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages',', --div--;LLL:EXT:in_news/Resources/Private/Language/locallang_db.xlf:tx_innews_domain_model_news, --palette--;LLL:EXT:in_news/Resources/Private/Language/locallang_db.xlf:tx_innews_news.informations;newsInfos, --palette--;LLL:EXT:in_news/Resources/Private/Language/locallang_db.xlf:tx_innews_event.dates;eventDates, --palette--;LLL:EXT:in_news/Resources/Private/Language/locallang_db.xlf:tx_innews_event.informations;eventInfos', '', 'after:title');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages',', --palette--;LLL:EXT:in_news/Resources/Private/Language/locallang_db.xlf:tx_innews_news.informations;newsInfos, --palette--;LLL:EXT:in_news/Resources/Private/Language/locallang_db.xlf:tx_innews_event.informations;eventInfos, tx_innews_event_further;;;richtext::rte_transform[flag=rte_disabled|mode=ts_css]', '', 'after:title');
 
 $TCA['pages']['palettes']['newsInfos'] = array(
     'canNotCollapse' => 1,
-    'showitem' => ' tx_innews_news_teaser' );
-$TCA['pages']['palettes']['eventDates'] = array(
-    'canNotCollapse' => 1,
-    'showitem' => ' tx_innews_event_from, tx_innews_event_to,');
+    'showitem' => ' tx_innews_news_top, tx_innews_news_display_date, --linebreak--, tx_innews_news_teaser' );
 $TCA['pages']['palettes']['eventInfos'] = array(
     'canNotCollapse' => 1,
-    'showitem' => ' tx_innews_event_further;;;richtext::rte_transform[flag=rte_disabled|mode=ts_css],');
+    'showitem' => ' tx_innews_event_from, tx_innews_event_to, --linebreak--,,');
 
 // News doktype
 t3lib_div::loadTCA('pages');

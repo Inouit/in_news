@@ -14,6 +14,7 @@ plugin.tx_innews {
                     columns {
                         tx_innews_news_top.mapOnProperty = top
                         tx_innews_news_teaser.mapOnProperty = teaser
+                        tx_innews_news_display_date.mapOnProperty = displayDate
                         tx_innews_event_from.mapOnProperty = from
                         tx_innews_event_to.mapOnProperty = to
                         tx_innews_event_further.mapOnProperty = further
@@ -26,6 +27,7 @@ plugin.tx_innews {
                     columns {
                         title.mapOnProperty = title
                         tx_innews_category_list_page.mapOnProperty = listPage
+                        items.mapOnProperty = items
                     }
                 }
             }
