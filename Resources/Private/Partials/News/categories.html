@@ -1,0 +1,7 @@
+<f:if condition="<f:count subject='{items}' /> > 0">
+  <ul class="categories">
+  <f:for each="{items}" as="category">
+    <li>{category.title}</li>
+  </f:for>
+  </ul>
+</f:if>

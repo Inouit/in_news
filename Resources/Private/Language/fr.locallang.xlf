@@ -4,9 +4,41 @@
 		<header/>
 		<body>
 
-			<trans-unit id="tx_innews_domain_model_news" approved="yes">
-				<source>News</source> <target state="translated">Actualités</target></trans-unit>
-			
+      <trans-unit id="tx_innews_domain_model_news" approved="yes">
+        <source>News</source>
+        <target state="translated">Actualités</target>
+      </trans-unit>
+
+			<trans-unit id="dateFormat" approved="yes">
+				<source>%m/%d/%Y</source>
+        <target state="translated">%d/%m/%Y</target>
+      </trans-unit>
+
+      <trans-unit id="date.the" approved="yes">
+        <source>The </source>
+        <target state="translated">Le </target>
+      </trans-unit>
+
+      <trans-unit id="date.from" approved="yes">
+        <source>From </source>
+        <target state="translated">Du </target>
+      </trans-unit>
+
+      <trans-unit id="date.to" approved="yes">
+        <source>To </source>
+        <target state="translated"> au </target>
+      </trans-unit>
+
+      <trans-unit id="date.fromOnly" approved="yes">
+        <source>From </source>
+        <target state="translated">À partir du </target>
+      </trans-unit>
+
+      <trans-unit id="date.toOnly" approved="yes">
+        <source>Until </source>
+        <target state="translated">Jusqu'au </target>
+      </trans-unit>
+
 		</body>
 	</file>
 </xliff>

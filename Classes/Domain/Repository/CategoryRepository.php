@@ -5,7 +5,7 @@ namespace Inouit\InNews\Domain\Repository;
  *  Copyright notice
  *
  *  (c) 2013 Grégory Copin <gcopin@inouit.com>, Inouit
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -33,7 +33,7 @@ namespace Inouit\InNews\Domain\Repository;
  *
  */
 class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRepository {
-	
+
 	/**
 	 * Find Recursive list
 	 *
@@ -49,8 +49,8 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
 				$query->equals('parent', (int)$parent)
 			))->execute();
 
+		$cats = array();
 		if($results && count($results)){
-			$cats = array();
 			foreach($results as $k=>$v) {
 				$cats[$v->getUid()] = $v;
 				$cats[$v->getUid()]->setChildren(self::findAllRecursivly($v->getUid()));
