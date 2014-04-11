@@ -1,16 +1,10 @@
 {namespace in=Inouit\InNews\ViewHelpers}
 
-
-<div class="news-item">
+<div class="news-item <f:if condition="{newsItem.top}">news-top</f:if>">
   <h3><f:link.page pageUid="{newsItem.uid}">{newsItem.title}</f:link.page></h3>
-
+  <p class="date"><in:news.date news="{newsItem}"/></p>
   <f:render partial="News/categories" arguments="{items: newsItem.categories, settings:settings}" />
-
-  <!--f:render partial="News/date" arguments="{items: newsItem, settings:settings}" /-->
-  <p>++<in:news.date news="{newsItem}"/>--</p>
-
-  <f:if condition="{newsItem.media}">
-    <f:image src="{newsItem.media.uid}" alt="{newsItem.title}" width="150" height="100m" treatIdAsReference="1" />
-  </f:if>
+  <f:render partial="News/media" arguments="{item: newsItem}" />
   <p class="teaser">{newsItem.teaser}</p>
+  <p class="further"><f:format.html>{newsItem.further}</f:format.html></p>
 </div>

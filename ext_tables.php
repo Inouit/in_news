@@ -129,7 +129,7 @@ $temp[$newPageTypeOrder] = array ('0' => 'LLL:EXT:in_news/Resources/Private/Lang
 $TCA['pages']['columns']['doktype']['config']['items'] = $temp;
 ksort($TCA['pages']['columns']['doktype']['config']['items']);
 
-$PAGES_TYPES[$newsDoktype] = Array('icon' => "EXT:".$_EXTKEY."/Resources/Public/icons/pages.gif",
+$PAGES_TYPES[$newsDoktype] = Array('icon' => "EXT:".$_EXTKEY."/Resources/Public/icons/news.png",
                                     'allowedTables' => '*',);
 $TCA['pages']['types'][$newsDoktype]['showitem'] = $TCA['pages']['types'][1]['showitem'];
 

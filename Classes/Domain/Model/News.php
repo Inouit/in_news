@@ -68,6 +68,11 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
       */
      protected $categories;
 
+    /**
+     * @var boolean
+     */
+    protected $top;
+
 	/**
 	 * @var string
 	 */
@@ -92,6 +97,11 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @var string
 	 */
     protected $where;
+
+    /**
+     * @var string
+     */
+    protected $further;
 
     /**
      * Constructs this post
@@ -244,6 +254,28 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
         return $this;
     }
 
+    /**
+     * Getter for top
+     *
+     * @return is
+     */
+    public function isTop() {
+        return $this->top;
+    }
+
+
+    /**
+     * Setter for top
+     *
+     * @param  is  top
+     * @return is
+     */
+    public function setTop($top) {
+        $this->top = $top;
+        return $this;
+    }
+
+
 
     /**
      * Getter for teaser
@@ -324,5 +356,27 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     {
         $this->where = $where;
     }
+
+    /**
+     * Getter for further
+     *
+     * @return string
+     */
+    public function getFurther() {
+        return $this->further;
+    }
+
+
+    /**
+     * Setter for further
+     *
+     * @param  string  further
+     * @return string
+     */
+    public function setFurther($further) {
+        $this->further = $further;
+        return $this;
+    }
+
 }
 ?>
