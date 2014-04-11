@@ -56,7 +56,7 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * media
-	 * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
  	 * @lazy
 	 */
 	protected $media;
@@ -93,11 +93,6 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
     protected $to;
 
-	/**
-	 * @var string
-	 */
-    protected $where;
-
     /**
      * @var string
      */
@@ -107,6 +102,7 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * Constructs this post
      */
     public function __construct() {
+        $this->media = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->categories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
 
@@ -147,6 +143,54 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      */
     public function setCategories(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories) {
         $this->categories = $categories;
+    }
+
+    /**
+     * Add a Media
+     *
+     * @param Tx_Inannuaire_Domain_Model_Grades $media
+     * @return void
+     */
+    public function addMedia(Tx_Inannuaire_Domain_Model_Grades $media) {
+        $this->media->attach($media);
+    }
+
+    /**
+     * Remove a Media
+     *
+     * @param Tx_Inannuaire_Domain_Model_Grades $mediaToRemove The Grades to be removed
+     * @return void
+     */
+    public function removeMedia(Tx_Inannuaire_Domain_Model_Grades $mediaToRemove) {
+        $this->media->detach($mediaToRemove);
+    }
+
+    /**
+    * Returns the Media
+    *
+    * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage A storage holding Tx_Inannuaire_Domain_Model_Grades objects
+    */
+    public function getMedia() {
+        return $this->media;
+    }
+
+    /**
+    * Returns the Media
+    *
+    * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage A storage holding Tx_Inannuaire_Domain_Model_Grades objects
+    */
+    public function getFirstMedia() {
+        return count($this->media) ? $this->media->current() : null;
+    }
+
+    /**
+     * Sets the Media
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $media One or more Tx_Inannuaire_Domain_Model_Grades objects
+     * @return void
+     */
+    public function setMedia(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $media) {
+        $this->media = $media;
     }
 
 
@@ -209,28 +253,28 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		$this->starttime = $starttime;
 	}
 
-	/**
-	 * sets the media
-	 *
-	 * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $media
-	 *
-	 * @return void
-	 */
-	public function setMedia($media) {
-		$this->media = $media;
-	}
+	// /**
+	//  * sets the media
+	//  *
+	//  * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $media
+	//  *
+	//  * @return void
+	//  */
+	// public function setMedia($media) {
+	// 	$this->media = $media;
+	// }
 
-	/**
-	 * get the media
-	 *
-	 * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference
-	 */
-	public function getMedia() {
-		if ($this->media instanceof \TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy) {
-			$this->media->_loadRealInstance();
-		}
-		return ($this->media ? $this->media->getOriginalResource() : null);
-	}
+	// *
+	//  * get the media
+	//  *
+	//  * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference
+
+	// public function getMedia() {
+	// 	if ($this->media instanceof \TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy) {
+	// 		$this->media->_loadRealInstance();
+	// 	}
+	// 	return ($this->media ? $this->media->getOriginalResource() : null);
+	// }
 
     /**
      * Getter for displayDate
@@ -335,27 +379,6 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function setTo($to) {
 		$this->to = $to;
 	}
-
-    /**
-     * Getter for where
-     *
-     * @return mixed
-     */
-    public function getWhere()
-    {
-        return $this->where;
-    }
-
-    /**
-     * Setter for where
-     *
-     * @param mixed $where Value to set
-     * @return self
-     */
-    public function setWhere($where)
-    {
-        $this->where = $where;
-    }
 
     /**
      * Getter for further

@@ -1,10 +1,29 @@
 {namespace in=Inouit\InNews\ViewHelpers}
 
+<f:comment>
+  Available fields:
+    - top
+    - title
+    - displayDate
+    - from
+    - to
+    - categories  (ObjectStorage)
+    - media       (ObjectStorage)
+    - further     (f:format.html)
+
+  Available partials:
+    - News/categories : display the category's list
+    - News/media      : display the media's list or the first media
+
+  Available ViewHelper:
+    - Inouit\InNews\ViewHelpers\News\Data : display smart dates width displayDate, from and to
+
+</f:comment>
+
 <div class="news-item <f:if condition="{newsItem.top}">news-top</f:if>">
   <h3><f:link.page pageUid="{newsItem.uid}">{newsItem.title}</f:link.page></h3>
   <p class="date"><in:news.date news="{newsItem}"/></p>
   <f:render partial="News/categories" arguments="{items: newsItem.categories, settings:settings}" />
-  <f:render partial="News/media" arguments="{item: newsItem}" />
+  <f:render partial="News/media" arguments="{item: newsItem, settings:settings}" />
   <p class="teaser">{newsItem.teaser}</p>
-  <p class="further"><f:format.html>{newsItem.further}</f:format.html></p>
 </div>

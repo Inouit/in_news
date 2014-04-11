@@ -1,45 +1,58 @@
 plugin.tx_innews {
-    view {
-        templateRootPath = {$plugin.tx_innews.view.templateRootPath}
-        partialRootPath = {$plugin.tx_innews.view.partialRootPath}
-        layoutRootPath = {$plugin.tx_innews.view.layoutRootPath}
-    }
-    persistence {
-        storagePid = {$plugin.tx_innews.persistence.storagePid}
+  view {
+    templateRootPath = {$plugin.tx_innews.view.templateRootPath}
+    partialRootPath = {$plugin.tx_innews.view.partialRootPath}
+    layoutRootPath = {$plugin.tx_innews.view.layoutRootPath}
+  }
+  persistence {
+    storagePid = {$plugin.tx_innews.persistence.storagePid}
 
-        classes{
-            Inouit\InNews\Domain\Model\News {
-                mapping {
-                    tableName = pages
-                    columns {
-                        tx_innews_news_top.mapOnProperty = top
-                        tx_innews_news_teaser.mapOnProperty = teaser
-                        tx_innews_news_display_date.mapOnProperty = displayDate
-                        tx_innews_event_from.mapOnProperty = from
-                        tx_innews_event_to.mapOnProperty = to
-                        tx_innews_event_further.mapOnProperty = further
-                    }
-                }
-            }
-            Inouit\InNews\Domain\Model\Category {
-                mapping {
-                    tableName = sys_category
-                    columns {
-                        title.mapOnProperty = title
-                        tx_innews_category_list_page.mapOnProperty = listPage
-                        items.mapOnProperty = items
-                    }
-                }
-            }
-
+    classes{
+      Inouit\InNews\Domain\Model\News {
+        mapping {
+          tableName = pages
+          columns {
+            tx_innews_news_top.mapOnProperty = top
+            tx_innews_news_teaser.mapOnProperty = teaser
+            tx_innews_news_display_date.mapOnProperty = displayDate
+            tx_innews_event_from.mapOnProperty = from
+            tx_innews_event_to.mapOnProperty = to
+            tx_innews_event_further.mapOnProperty = further
+          }
         }
+      }
+      Inouit\InNews\Domain\Model\Category {
+        mapping {
+          tableName = sys_category
+          columns {
+            title.mapOnProperty = title
+            tx_innews_category_list_page.mapOnProperty = listPage
+            items.mapOnProperty = items
+          }
+        }
+      }
+
     }
-    features {
-        # uncomment the following line to enable the new Property Mapper.
-        # rewrittenPropertyMapper = 1
+  }
+  features {
+    # uncomment the following line to enable the new Property Mapper.
+    # rewrittenPropertyMapper = 1
+  }
+  settings {
+    orderBy =
+    orderDirection =
+    topFirst =
+    onlyTop =
+
+
+    listPage = {$plugin.tx_innews.settings.listPage}
+    includeOngoingEvents = {$plugin.tx_innews.settings.includeOngoingEvents}
+
+    images{
+      list{
+        width = 200
+        height = 150m
+      }
     }
-    settings {
-        listPage = {$plugin.tx_innews.settings.listPage}
-        includeOngoingEvents = {$plugin.tx_innews.settings.includeOngoingEvents}
-    }
+  }
 }

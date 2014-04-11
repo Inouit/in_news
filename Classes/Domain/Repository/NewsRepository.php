@@ -74,6 +74,31 @@ class NewsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		return $query->execute();
 	}
 
+	public function findAllBySettings($settings) {
+		$query = $this->createQuery();
+
+		// MATCHING CLAUSE
+		$matching = array();
+		if($settings['onlyTop'] == 1) {
+			array_push($matching, $query->equals('top', 1));
+		}
+		if(count($matching)){
+			$query->matching($query->logicalAnd($matching));
+		}
+
+		// ORDERS BY
+		$orders = array();
+		// -- Highilighted first
+		if($settings['topFirst'] == 1) {
+			$orders['top'] = QueryInterface::ORDER_DESCENDING;
+		}
+		// -- Others orders
+		$orders[$settings['orderBy']] = $settings['orderDirection'];
+		$query->setOrderings($orders);
+
+		return $query->execute();
+	}
+
 	/**
 	 * @param Category $category
 	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface

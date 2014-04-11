@@ -36,6 +36,66 @@
 						</TCEforms>
 					</switchableControllerActions>
 
+					<settings.orderBy>
+						<TCEforms>
+							<label>LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.orderBy</label>
+							<config>
+								<type>select</type>
+								<items>
+									<numIndex index="0">
+										<numIndex index="0">LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.orderBy.displayDate</numIndex>
+										<numIndex index="1">displayDate</numIndex>
+									</numIndex>
+									<numIndex index="1">
+										<numIndex index="0">LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.orderBy.crdate</numIndex>
+										<numIndex index="1">crdate</numIndex>
+									</numIndex>
+									<numIndex index="2">
+										<numIndex index="0">LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.orderBy.tstamp</numIndex>
+										<numIndex index="1">tstamp</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</settings.orderBy>
+
+					<settings.orderDirection>
+						<TCEforms>
+							<label>LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.orderDirection</label>
+							<config>
+								<type>select</type>
+								<items>
+									<numIndex index="0">
+										<numIndex index="0">LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.orderDirection.descendant</numIndex>
+										<numIndex index="1">DESC</numIndex>
+									</numIndex>
+									<numIndex index="1">
+										<numIndex index="0">LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.orderDirection.ascendant</numIndex>
+										<numIndex index="1">ASC</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</settings.orderDirection>
+
+					<settings.topFirst>
+						<TCEforms>
+							<label>LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.topFirst</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</settings.topFirst>
+
+					<settings.onlyTop>
+						<TCEforms>
+							<label>LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.onlyTop</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</settings.onlyTop>
+
 					<includeOngoingEvents>
 						<TCEforms>
 							<label>LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.includeOngoingEvents</label>

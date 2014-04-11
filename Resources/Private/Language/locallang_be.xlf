@@ -4,10 +4,24 @@
 		<header/>
 		<body>
 			<trans-unit id="flexform.sheet_title"><source>Settings</source></trans-unit>
+
 			<trans-unit id="flexform.display"><source>Display</source></trans-unit>
 			<trans-unit id="flexform.display.cat_list"><source>Categories list</source></trans-unit>
       <trans-unit id="flexform.display.news_list"><source>News list</source></trans-unit>
       <trans-unit id="flexform.display.news_list_future_event"><source>Future events list</source></trans-unit>
+
+			<trans-unit id="flexform.orderBy"><source>Order by</source></trans-unit>
+			<trans-unit id="flexform.orderBy.displayDate"><source>Display date</source></trans-unit>
+			<trans-unit id="flexform.orderBy.crdate"><source>Creation date</source></trans-unit>
+			<trans-unit id="flexform.orderBy.tstamp"><source>Update date</source></trans-unit>
+
+			<trans-unit id="flexform.orderDirection"><source>Order direction</source></trans-unit>
+			<trans-unit id="flexform.orderDirection.descendant"><source>Descendant</source></trans-unit>
+			<trans-unit id="flexform.orderDirection.ascendant"><source>Ascendant</source></trans-unit>
+
+			<trans-unit id="flexform.topFirst"><source>Highlighted first</source></trans-unit>
+			<trans-unit id="flexform.onlyTop"><source>Only highlighted news</source></trans-unit>
+
 			<trans-unit id="flexform.includeOngoingEvents"><source>Include ongoing events</source></trans-unit>
 		</body>
 	</file>

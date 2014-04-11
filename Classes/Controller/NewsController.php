@@ -61,14 +61,16 @@ class NewsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             $args = $this->request->getArguments();
             $categoryUid = $args['category'];
 
-            if ($categoryUid !==null && !empty($categoryUid)) {
-                $category = $this->categoryRepository->findOneByUid($categoryUid);
-                $news = $this->newsRepository->findByCategory($category);
+            $news = $this->newsRepository->findAllBySettings($this->settings);
 
-                $this->view->assign('requestedCategory', $category);
-            } else {
-                $news = $this->newsRepository->findAll();
-            }
+            // if ($categoryUid !==null && !empty($categoryUid)) {
+            //     $category = $this->categoryRepository->findOneByUid($categoryUid);
+            //     $news = $this->newsRepository->findByCategory($category);
+
+            //     $this->view->assign('requestedCategory', $category);
+            // } else {
+            //     $news = $this->newsRepository->findAll();
+            // }
         }
         $this->view->assign('news', $news);
     }
@@ -84,7 +86,6 @@ class NewsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             $args = $this->request->getArguments();
             $categoryUid = $args['category'];
 
-            \TYPO3\CMS\Core\Utility\DebugUtility::debug($this->settings);
 
             if ($categoryUid !==null && !empty($categoryUid)) {
                 $category = $this->categoryRepository->findOneByUid($categoryUid);
