@@ -15,19 +15,14 @@
 					<switchableControllerActions>
 						<TCEforms>
 						<label>LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.display</label>
-						<!--onChange>reload</onChange-->
 						<config>
 							<type>select</type>
 							<items>
-								<numIndex index="1">
+								<numIndex index="0">
 									<numIndex index="0">LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.display.news_list</numIndex>
 									<numIndex index="1">News->list</numIndex>
 								</numIndex>
-								<numIndex index="2">
-									<numIndex index="0">LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.display.news_list_future_event</numIndex>
-									<numIndex index="1">News->listFutureEvent</numIndex>
-								</numIndex>
-								<numIndex index="3">
+								<numIndex index="1">
 									<numIndex index="0">LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.display.cat_list</numIndex>
 									<numIndex index="1">Category->list</numIndex>
 								</numIndex>
@@ -39,6 +34,7 @@
 					<settings.orderBy>
 						<TCEforms>
 							<label>LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.orderBy</label>
+							<displayCond>FIELD:switchableControllerActions:=:News->list</displayCond>
 							<config>
 								<type>select</type>
 								<items>
@@ -62,6 +58,7 @@
 					<settings.orderDirection>
 						<TCEforms>
 							<label>LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.orderDirection</label>
+							<displayCond>FIELD:switchableControllerActions:=:News->list</displayCond>
 							<config>
 								<type>select</type>
 								<items>
@@ -81,6 +78,7 @@
 					<settings.topFirst>
 						<TCEforms>
 							<label>LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.topFirst</label>
+							<displayCond>FIELD:switchableControllerActions:=:News->list</displayCond>
 							<config>
 								<type>check</type>
 							</config>
@@ -90,21 +88,93 @@
 					<settings.onlyTop>
 						<TCEforms>
 							<label>LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.onlyTop</label>
+							<displayCond>FIELD:switchableControllerActions:=:News->list</displayCond>
 							<config>
 								<type>check</type>
 							</config>
 						</TCEforms>
 					</settings.onlyTop>
 
-					<includeOngoingEvents>
+					<settings.targetedCategories>
 						<TCEforms>
-							<label>LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.includeOngoingEvents</label>
-							<displayCond>FIELD:switchableControllerActions:=:News->listFutureEvent</displayCond>
+							<label>LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.targetedCategories</label>
+							<config>
+								<type>select</type>
+								<foreign_table>sys_category</foreign_table>
+								<foreign_table_where> AND sys_category.sys_language_uid IN (-1, 0) ORDER BY sys_category.sorting ASC</foreign_table_where>
+								<size>10</size>
+								<autoSizeMax>50</autoSizeMax>
+								<maxitems>9999</maxitems>
+								<renderMode>tree</renderMode>
+								<treeConfig>
+									<parentField>parent</parentField>
+									<appearance>
+										<expandAll>TRUE</expandAll>
+										<showHeader>TRUE</showHeader>
+									</appearance>
+								</treeConfig>
+							</config>
+						</TCEforms>
+					</settings.targetedCategories>
+
+					<settings.targetedCategoriesUnion>
+						<TCEforms>
+							<label>LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.targetedCategoriesUnion</label>
+							<displayCond>FIELD:switchableControllerActions:=:News->list</displayCond>
+							<config>
+								<type>select</type>
+								<items>
+									<numIndex index="0">
+										<numIndex index="0">LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.targetedCategoriesUnion.or</numIndex>
+										<numIndex index="1">OR</numIndex>
+									</numIndex>
+									<numIndex index="1">
+										<numIndex index="0">LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.targetedCategoriesUnion.and</numIndex>
+										<numIndex index="1">AND</numIndex>
+									</numIndex>
+									<numIndex index="2">
+										<numIndex index="0">LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.targetedCategoriesUnion.any</numIndex>
+										<numIndex index="1">ANY</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</settings.targetedCategoriesUnion>
+
+
+					<settings.excludePastEvents>
+						<TCEforms>
+							<label>LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.excludePastEvents</label>
+							<displayCond>FIELD:switchableControllerActions:=:News->list</displayCond>
 							<config>
 								<type>check</type>
 							</config>
 						</TCEforms>
-					</includeOngoingEvents>
+					</settings.excludePastEvents>
+
+					<settings.limit>
+						<TCEforms>
+							<label>LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.limit</label>
+							<displayCond>FIELD:switchableControllerActions:=:News->list</displayCond>
+							<config>
+								<type>input</type>
+								<size>5</size>
+								<eval>num</eval>
+							</config>
+						</TCEforms>
+					</settings.limit>
+
+					<settings.pagebrowser.itemsPerPage>
+						<TCEforms>
+							<label>LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.itemsPerPage</label>
+							<displayCond>FIELD:switchableControllerActions:=:News->list</displayCond>
+							<config>
+								<type>input</type>
+								<size>5</size>
+								<eval>num</eval>
+							</config>
+						</TCEforms>
+					</settings.pagebrowser.itemsPerPage>
 				</el>
 			</ROOT>
 		</sDEF>

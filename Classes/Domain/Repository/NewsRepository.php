@@ -36,9 +36,12 @@ use Inouit\InNews\Domain\Model\Category;
 use \TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
 class NewsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+	const CATEGORY_UNION_OR = 'OR';
+	const CATEGORY_UNION_AND = 'AND';
+	const CATEGORY_UNION_ANY = 'ANY';
 
 	 protected $defaultOrderings = array(
-	 	'crdate' => QueryInterface::ORDER_ASCENDING
+	 	'displayDate' => QueryInterface::ORDER_DESCENDING
 	);
 
 	/**
@@ -74,19 +77,104 @@ class NewsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		return $query->execute();
 	}
 
-	public function findAllBySettings($settings) {
-		$query = $this->createQuery();
-
-		// MATCHING CLAUSE
+	/**
+	 * Apply typoscript settings to a query
+	 * @param  \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
+	 * @param array $settings
+	 * @return \TYPO3\CMS\Extbase\Persistence\QueryInterface
+	 */
+	protected function applySettings($query, $settings) {
+		// MATCHING
 		$matching = array();
-		if($settings['onlyTop'] == 1) {
-			array_push($matching, $query->equals('top', 1));
-		}
+		$matching = $this->onlyTopFilter($matching, $query, $settings);
+		$matching = $this->categoriesFilter($matching, $query, $settings);
+		$matching = $this->excludePastEventsFilter($matching, $query, $settings);
+		// -- Apply matching
 		if(count($matching)){
 			$query->matching($query->logicalAnd($matching));
 		}
 
 		// ORDERS BY
+		$query = $this->setOrderBy($query, $settings);
+
+		// LIMIT
+		$query = $this->setLimit($query, $settings);
+
+		return $query;
+	}
+
+	/**
+	 * Filter only the highlighted news
+	 * @param  array $matching current constraints
+	 * @param  \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
+	 * @param  array $settings
+	 * @return array
+	 */
+	protected function onlyTopFilter($matching, $query, $settings) {
+		if($settings['onlyTop'] == 1) {
+			array_push($matching, $query->equals('top', 1));
+		}
+
+		return $matching;
+	}
+
+	/**
+	 * Filter only news related to targeted categories
+	 * @param  array $matching current constraints
+	 * @param  \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
+	 * @param  array $settings
+	 * @return array
+	 */
+	protected function categoriesFilter($matching, $query, $settings) {
+		if($settings['targetedCategories'] && $cats = \TYPO3\CMS\Core\Utility\GeneralUtility::intExplode(',', $settings['targetedCategories'])) {
+			$matching2 = array();
+			foreach($cats as $cat) {
+				array_push($matching2, $query->contains('categories', $cat));
+			}
+			switch (strtoupper($settings['targetedCategoriesUnion'])) {
+				case self::CATEGORY_UNION_AND:
+					array_push($matching, $query->logicalAnd($matching2));
+					break;
+				case self::CATEGORY_UNION_ANY:
+					array_push($matching, $query->logicalNot($query->logicalOr($matching2)));
+					break;
+				case self::CATEGORY_UNION_OR:
+				default:
+					array_push($matching, $query->logicalOr($matching2));
+					break;
+			}
+		}
+
+		return $matching;
+	}
+
+	/**
+	 * Filter only news which are not past's news
+	 * @param  array $matching current constraints
+	 * @param  \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
+	 * @param  array $settings
+	 * @return \TYPO3\CMS\Extbase\Persistence\QueryInterface
+	 */
+	protected function excludePastEventsFilter($matching, $query, $settings) {
+		if($settings['excludePastEvents'] == 1) {
+			$limit = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
+			\TYPO3\CMS\Core\Utility\DebugUtility::debug($limit);
+			array_push($matching, $query->logicalOr(
+				$query->greaterThanOrEqual('to', $limit),
+				$query->greaterThanOrEqual('displayDate', $limit)
+			));
+		}
+
+		return $matching;
+	}
+
+	/**
+	 * Set the order by depending on settings
+	 * @param  \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
+	 * @param array $settings
+	 * @return  array
+	 */
+	protected function setOrderBy( $query, $settings) {
 		$orders = array();
 		// -- Highilighted first
 		if($settings['topFirst'] == 1) {
@@ -94,39 +182,36 @@ class NewsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		}
 		// -- Others orders
 		$orders[$settings['orderBy']] = $settings['orderDirection'];
-		$query->setOrderings($orders);
+		// -- Default ordering
+		$orders['from'] = $settings['orderDirection'];
+		$orders['to'] = $settings['orderDirection'];
 
-		return $query->execute();
+		return $query->setOrderings($orders);
 	}
 
 	/**
-	 * @param Category $category
-	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 * Set the limit of the query depending on settings
+	 * @param  \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
+	 * @param array $settings
+	 * @return  \TYPO3\CMS\Extbase\Persistence\QueryInterface
 	 */
-	public function findByCategory(Category $category, $orderDirection = null) {
-		$query = $this->createQuery();
-		$query->matching(
-			$query->contains('category', $category)
-		);
-
-		if($orderDirection !== null) {
-			$query->setOrderings(array('crdate' => $orderDirection));
+	protected function setLimit($query, $settings) {
+		if($settings['limit'] && intVal($settings['limit']) > 0) {
+			$query->setLimit(intVal($settings['limit']));
 		}
 
-		return $query->execute();
+		return $query;
 	}
 
 	/**
+	 * Find all news by settings
+	 * @param  array $settings Typoscript settings
 	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
 	 */
-	public function findFutureEvents() {
+	public function findAllBySettings($settings) {
 		$query = $this->createQuery();
-		$query->matching(
-			$query->greaterThanOrEqual('tx_innews_event_to', time())
-		);
-		$query->matching(
-			$query->lessThanOrEqual('tx_innews_event_from', time())
-		);
+
+		$query = $this->applySettings($query, $settings);
 
 		return $query->execute();
 	}

@@ -1,10 +1,21 @@
+{namespace in=Inouit\InNews\ViewHelpers}
+
 <f:layout name="Default" />
 <f:section name="main">
-
-<f:if condition="{news -> f.count()}">
-	<f:for each="{news}" as="newsItem">
-		<f:render partial="List/Item" arguments="{newsItem: newsItem, settings:settings}" />
-	</f:for>
-</f:if>
-
+  <f:if condition="{news -> f.count()}">
+    <in:ifPageBrowserEnabled results="{news}" limit="{settings.pagebrowser.itemsPerPage}" >
+      <f:then>
+        <f:widget.paginate objects="{news}" as="newsBlocs" configuration="{settings.pagebrowser}">
+          <f:for each="{newsBlocs}" as="newsItem">
+            <f:render partial="List/Item" arguments="{newsItem: newsItem, settings:settings}" />
+          </f:for>
+        </f:widget.paginate>
+      </f:then>
+      <f:else>
+        <f:for each="{news}" as="newsItem">
+          <f:render partial="List/Item" arguments="{newsItem: newsItem, settings:settings}" />
+        </f:for>
+      </f:else>
+    </in:ifPageBrowserEnabled>
+  </f:if>
 </f:section>

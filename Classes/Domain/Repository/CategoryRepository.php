@@ -34,20 +34,46 @@ namespace Inouit\InNews\Domain\Repository;
  */
 class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRepository {
 
+
+	/**
+	 * Filter only news related to targeted categories
+	 * @param  array $matching current constraints
+	 * @param  \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
+	 * @param  array $settings
+	 * @return array
+	 */
+	protected function categoriesFilter($matching, $query, $settings) {
+		if($settings['targetedCategories']) {
+			array_push($matching, $query->in('uid', $settings['targetedCategories']));
+		}
+
+		return $matching;
+	}
+
+
 	/**
 	 * Find Recursive list
 	 *
 	 * @param array $parent list of parent id
+	 * @param array $settings Typoscript settings
 	 * @return Tx_Extbase_Persistence_QueryInterface
 	 */
-	public function findAllRecursivly($parent = 0) {
+	public function findAllRecursivly($parent = 0, $settings) {
 		$query = $this->createQuery();
-		$query->getQuerySettings()->setRespectStoragePage(FALSE);
 
-		$results = $query->matching(
-			$query->logicalAnd(
-				$query->equals('parent', (int)$parent)
-			))->execute();
+		// MATCHING
+		$matching = array();
+		// $matching = $this->categoriesFilter($matching, $query, $settings);
+		$matching = array_push($matching, $query->equals('parent', (int)$parent));
+		// -- Apply matching
+		$query->matching($query->logicalAnd($matching));
+
+		// $results = $query->matching(
+		// 	$query->logicalAnd(
+		// 		$query->equals('parent', (int)$parent)
+		// 	))->execute();
+		$results = $query->execute();
+		\TYPO3\CMS\Core\Utility\DebugUtility::debug(count($results));
 
 		$cats = array();
 		if($results && count($results)){

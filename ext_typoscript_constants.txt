@@ -8,13 +8,15 @@ plugin.tx_innews {
 		layoutRootPath = EXT:in_news/Resources/Private/Layouts/
 	}
 	persistence {
-		# cat=plugin.tx_innews//a; type=integer; label=Default recursivity
+		# cat=plugin.tx_innews//a; type=integer; label=Storage folder
+		storagePid =
+		# cat=plugin.tx_innews//b; type=integer; label=Default recursivity
 		recursive =
 	}
 	settings {
-		# cat=plugin.tx_innews//a; type=integer; label=Listing page for news
+		# cat=plugin.tx_innews//c; type=integer; label=Listing page for news
 		listPage =
-		# cat=plugin.tx_innews//a; type=integer; label=Include ongoin events in future events list
-		includeOngoingEvents =
+		# cat=plugin.tx_innews//d; type=integer; label=Exclude past events
+		excludePastEvents =
 	}
 }

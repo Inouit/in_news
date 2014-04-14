@@ -5,7 +5,7 @@ namespace Inouit\InNews\Controller;
  *  Copyright notice
  *
  *  (c) 2013 Grégory Copin <gcopin@inouit.com>, Inouit
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -46,9 +46,9 @@ class CategoryController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      *
      * @return void
      */
-    public function listAction() 
+    public function listAction()
     {
-        $categories = $this->categoryRepository->findAllRecursivly();
+        $categories = $this->categoryRepository->findAllRecursivly($this->settings);
         $this->view->assign('categories', $categories);
     }
 

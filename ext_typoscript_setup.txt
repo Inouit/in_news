@@ -6,6 +6,7 @@ plugin.tx_innews {
   }
   persistence {
     storagePid = {$plugin.tx_innews.persistence.storagePid}
+    recursive = {$plugin.tx_innews.persistence.recursive}
 
     classes{
       Inouit\InNews\Domain\Model\News {
@@ -31,28 +32,27 @@ plugin.tx_innews {
           }
         }
       }
-
     }
   }
-  features {
-    # uncomment the following line to enable the new Property Mapper.
-    # rewrittenPropertyMapper = 1
-  }
   settings {
-    orderBy =
-    orderDirection =
+    orderBy = displayDate
+    orderDirection = DESC
+    limit =
     topFirst =
     onlyTop =
-
+    targetedCategories =
+    targetedCategoriesUnion = OR
+    excludePastEvents = {$plugin.tx_innews.settings.excludePastEvents}
 
     listPage = {$plugin.tx_innews.settings.listPage}
-    includeOngoingEvents = {$plugin.tx_innews.settings.includeOngoingEvents}
+
+    pagebrowser{
+      itemsPerPage =
+    }
 
     images{
-      list{
-        width = 200
-        height = 150m
-      }
+      width = 200
+      height = 150m
     }
   }
 }

@@ -18,6 +18,30 @@ if (!defined('TYPO3_MODE')) {
 $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY]);
 $newsDoktype = $extConf['newsDoktype'];
 
+// Pages TCA for category
+$tmp_in_news_category_columns = array(
+    'tx_innews_category_list_page' => array (
+        'exclude' => 0,
+        'label' => 'LLL:EXT:in_news/Resources/Private/Language/locallang_db.xlf:tx_innews_domain_model_category.list_page',
+        'config' => array (
+            'type'     => 'group',
+            'internal_type' => 'db',
+            'allowed' => 'pages',
+            'size'     => '1',
+            'maxitems' => '1',
+            'minitems' => '0',
+             'wizards'  => array(
+                'suggest' => array(
+                    'type' => 'suggest',
+                ),
+            )
+        )
+    ),
+);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('sys_category',$tmp_in_news_category_columns);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('sys_category','tx_innews_category_list_page', '', 'after:description');
+
+
 // Pages TCA for news
 $tmp_in_news_columns = array(
     'tx_innews_news_top' => array (

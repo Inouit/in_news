@@ -1,13 +1,13 @@
 <f:comment>
   If you want the first media, you can use:
-    <f:image src="{item.firstMedia.uid}" alt="{item.title}" width="{settings.images.list.width}" height="{settings.images.list.height}" treatIdAsReference="1" />
+    <f:image src="{item.firstMedia.uid}" alt="{item.title}" width="{settings.images.width}" height="{settings.images.height}" treatIdAsReference="1" />
 
   If you want all images:
     <f:for each="{item.media}" as="media">
-      <f:image src="{media.uid}" alt="{item.title}" width="{settings.images.list.width}" height="{settings.images.list.height}" treatIdAsReference="1" />
+      <f:image src="{media.uid}" alt="{item.title}" width="{settings.images.width}" height="{settings.images.height}" treatIdAsReference="1" />
     </f:for>
 </f:comment>
 
 <f:if condition="{item.media}">
-  <f:image src="{item.firstMedia.uid}" alt="{item.title}" width="{settings.images.list.width}" height="{settings.images.list.height}" treatIdAsReference="1" />
+  <f:image src="{item.firstMedia.uid}" alt="{item.title}" width="{settings.images.width}" height="{settings.images.height}" treatIdAsReference="1" />
 </f:if>
