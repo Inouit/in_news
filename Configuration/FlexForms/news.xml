@@ -15,14 +15,19 @@
 					<switchableControllerActions>
 						<TCEforms>
 						<label>LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.display</label>
+						<onChange>reload</onChange>
 						<config>
 							<type>select</type>
 							<items>
 								<numIndex index="0">
+									<numIndex index="0"></numIndex>
+									<numIndex index="1"></numIndex>
+								</numIndex>
+								<numIndex index="1">
 									<numIndex index="0">LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.display.news_list</numIndex>
 									<numIndex index="1">News->list</numIndex>
 								</numIndex>
-								<numIndex index="1">
+								<numIndex index="2">
 									<numIndex index="0">LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.display.cat_list</numIndex>
 									<numIndex index="1">Category->list</numIndex>
 								</numIndex>
@@ -98,6 +103,7 @@
 					<settings.targetedCategories>
 						<TCEforms>
 							<label>LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.targetedCategories</label>
+							<displayCond>FIELD:switchableControllerActions:=:News->list,Category->list</displayCond>
 							<config>
 								<type>select</type>
 								<foreign_table>sys_category</foreign_table>

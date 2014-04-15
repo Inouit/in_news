@@ -3,6 +3,9 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2013-06-26T23:31:24Z" product-name="in_news">
 		<header/>
 		<body>
+			<trans-unit id="plugin.name" approved="yes"><source>News</source><target state="translated">Actualités</target></trans-unit>
+			<trans-unit id="plugin.description" approved="yes"><source>Manage news and events with pages and typo3 categories</source><target state="translated">Gérez vos actualités et vos événements avec les pages et les catégories de Typo3</target></trans-unit>
+
 			<trans-unit id="flexform.sheet_title" approved="yes"><source>Settings</source><target state="translated">Paramètres</target></trans-unit>
 			<trans-unit id="flexform.display" approved="yes"><source>Display</source><target state="translated">Affichage</target></trans-unit>
 			<trans-unit id="flexform.display.cat_list" approved="yes"><source>Categories list</source><target state="translated">Liste des catégories</target></trans-unit>

@@ -3,6 +3,9 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2013-06-26T23:31:24Z" product-name="in_news">
 		<header/>
 		<body>
+			<trans-unit id="plugin.name"><source>News</source></trans-unit>
+			<trans-unit id="plugin.description"><source>Manage news and events with pages and typo3 categories</source></trans-unit>
+
 			<trans-unit id="flexform.sheet_title"><source>Settings</source></trans-unit>
 
 			<trans-unit id="flexform.display"><source>Display</source></trans-unit>

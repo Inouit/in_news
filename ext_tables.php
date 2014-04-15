@@ -10,6 +10,14 @@ if (!defined('TYPO3_MODE')) {
     'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang.xlf:tx_innews_domain_model_news'
 );
 
+// Wizard pi1
+$extensionName = t3lib_div::underscoredToUpperCamelCase($_EXTKEY);
+$pluginSignature = strtolower($extensionName) . '_pi1';
+if (TYPO3_MODE == 'BE') {
+    $TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses'][$pluginSignature . '_wizicon'] =
+        t3lib_extMgm::extPath($_EXTKEY) . 'Resources/Private/Php/class.' . strtolower($extensionName) . '_wizicon.php';
+}
+
 // Static
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/Styles', 'News - styles');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/NewsCategoriesMenu', 'News - TS for categories menu');
