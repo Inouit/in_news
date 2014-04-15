@@ -2,8 +2,9 @@
 
 <f:layout name="Default" />
 <f:section name="main">
+
   <f:if condition="{news -> f.count()}">
-    <in:ifPageBrowserEnabled results="{news}" limit="{settings.pagebrowser.itemsPerPage}" >
+    <in:condition.pageBrowserEnabled results="{news}" limit="{settings.pagebrowser.itemsPerPage}" >
       <f:then>
         <f:widget.paginate objects="{news}" as="newsBlocs" configuration="{settings.pagebrowser}">
           <f:for each="{newsBlocs}" as="newsItem">
@@ -16,6 +17,6 @@
           <f:render partial="List/Item" arguments="{newsItem: newsItem, settings:settings}" />
         </f:for>
       </f:else>
-    </in:ifPageBrowserEnabled>
+    </in:condition.pageBrowserEnabled>
   </f:if>
 </f:section>

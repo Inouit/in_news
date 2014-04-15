@@ -1,0 +1,10 @@
+plugin.tx_innews._CSS_DEFAULT_STYLE (
+
+	.tx-in-news { }
+	.tx-in-news .news-item { clear: both; }
+	.tx-in-news .news-item .date { margin: .5em 0; font-size: 1.2em; font-style: italic; color: gray; }
+  .tx-in-news .news-item img { float: left; margin: 0 20px 20px 0; }
+  .tx-in-news .news-item .categories { display: inline; margin: 0; padding: 0; }
+  .tx-in-news .news-item .categories li { display: inline; }
+  .tx-in-news .news-item .categories li+li:before { content: ', '; }
+)

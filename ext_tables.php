@@ -11,7 +11,8 @@ if (!defined('TYPO3_MODE')) {
 );
 
 // Static
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Default styles');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/Styles', 'News - styles');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/NewsCategoriesMenu', 'News - TS for categories menu');
 
 
 // ExtConf

@@ -43,6 +43,8 @@ plugin.tx_innews {
     targetedCategories =
     targetedCategoriesUnion = OR
     excludePastEvents = {$plugin.tx_innews.settings.excludePastEvents}
+    notDisplayedCategories = {$plugin.tx_innews.settings.notDisplayedCategories}
+
 
     listPage = {$plugin.tx_innews.settings.listPage}
 

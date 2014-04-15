@@ -1,4 +1,4 @@
-{namespace in=Tx_InNews_ViewHelpers}
+{namespace in=Inouit\InNews\ViewHelpers}
 
 <f:if condition="{categories}">
 	<f:then>
@@ -10,14 +10,18 @@
 <f:section name="categoryList">
 	<ul>
 		<f:for each="{categories}" as="category">
-			<li>
-				<in:link.category category="{category}">{category.title}</in:link.category>
-				<f:if condition="{category.children}">
-					<f:then>
-						<f:render section="categoryList" arguments="{categories:category.children}"/>
-					</f:then>
-				</f:if>
-			</li>
+	    <in:condition.inArray needle="{category.uid}" haystack="{settings.notDisplayedCategories}">
+	      <f:else>
+	        <li>
+						<in:link.category category="{category}">{category.title}</in:link.category>
+						<f:if condition="{category.children}">
+							<f:then>
+								<f:render section="categoryList" arguments="{categories:category.children}"/>
+							</f:then>
+						</f:if>
+					</li>
+	      </f:else>
+	    </in:condition.inArray>
 		</f:for>
 	</ul>
 </f:section>

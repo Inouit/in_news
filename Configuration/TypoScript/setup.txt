@@ -1,7 +1,0 @@
-plugin.tx_innews._CSS_DEFAULT_STYLE (
-
-	.tx-in-news { }
-	.tx-in-news .news-item { clear: both; }
-	.tx-in-news .news-item img { float: left; margin: 0 20px 20px 0; }
-	.tx-in-news .news-item .date { margin: .5em 0; font-size: .9em; font-style: italic; color: gray; }
-)

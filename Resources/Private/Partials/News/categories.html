@@ -1,7 +1,13 @@
+{namespace in=Inouit\InNews\ViewHelpers}
+
 <f:if condition="<f:count subject='{items}' /> > 0">
   <ul class="categories">
   <f:for each="{items}" as="category">
-    <li>{category.title}</li>
+    <in:condition.inArray needle="{category.uid}" haystack="{settings.notDisplayedCategories}">
+      <f:else>
+        <li><in:link.category category="{category}">{category.title}</in:link.category></li>
+      </f:else>
+    </in:condition.inArray>
   </f:for>
   </ul>
 </f:if>

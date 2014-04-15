@@ -1,33 +1,7 @@
 <?php
-// namespace Inouit\InNews\Classes\ViewHelpers\Link;
+namespace Inouit\InNews\ViewHelpers\Link;
 
-/*                                                                        *
- * This script is part of the TYPO3 project - inspiring people to share!  *
- *                                                                        *
- * TYPO3 is free software; you can redistribute it and/or modify it under *
- * the terms of the GNU General Public License version 2 as published by  *
- * the Free Software Foundation.                                          *
- *                                                                        *
- * This script is distributed in the hope that it will be useful, but     *
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHAN-    *
- * TABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General      *
- * Public License for more details.                                       *
- *                                                                        */
-/**
- * A view helper for creating links to TYPO3 pages.
- *
- * = Examples =
- *
- * <code title="link to the current page">
- * <f:link.page>page link</f:link.page>
- * </code>
- * <output>
- * <a href="index.php?id=123">page link</f:link.action>
- * (depending on the current page and your TS configuration)
- * </output>
- */
-
-class Tx_InNews_ViewHelpers_Link_CategoryViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractTagBasedViewHelper
+class CategoryViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper
 {
 
     /**
@@ -68,8 +42,9 @@ class Tx_InNews_ViewHelpers_Link_CategoryViewHelper extends Tx_Fluid_Core_ViewHe
         // $pageUid override
         $newPageUid = 0;
         if(isset($this->arguments['category']) && $this->arguments['category'] !== null){
-            if(!is_object($this->arguments['category'])){
-                throw new \InvalidArgumentException('The argument "category" should be a "\Inouit\InNews\Classes\Model\Category"');
+            // \TYPO3\CMS\Core\Utility\DebugUtility::debug($this->arguments['category']);
+            if(!($this->arguments['category'] instanceof \Inouit\InNews\Domain\Model\Category)){
+                throw new \InvalidArgumentException('The argument "category" should be a "\Inouit\InNews\Domain\Model\Category, '.get_class($this->arguments['category']).' given"');
             } else {
                 if(is_int($this->arguments['category']->getListPage())) {
                     $newPageUid = $this->arguments['category']->getListPage();

@@ -1,12 +1,12 @@
 <?php
-namespace Inouit\InNews\ViewHelpers;
+namespace Inouit\InNews\ViewHelpers\Condition;
 
-class IfPageBrowserEnabledViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionViewHelper  {
+class PageBrowserEnabledViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionViewHelper  {
     /**
-     * Render the Date ViewHelper
+     * Check if the pagebrowser need to be displayed
      * @param  array $results QueryResult
      * @param  integer $limit Typoscript limit per page
-     * @return string HTML render
+     * @return mixed
      */
     public function render(array $results, integer $limit) {
         if ($limit && $limit > 0 && count($results) > $limit) {

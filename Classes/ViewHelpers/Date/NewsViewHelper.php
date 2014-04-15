@@ -1,7 +1,7 @@
 <?php
-namespace Inouit\InNews\ViewHelpers\News;
+namespace Inouit\InNews\ViewHelpers\Date;
 
-class DateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper  {
+class NewsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper  {
 
     /**
      * @var \TYPO3\CMS\Fluid\ViewHelpers\Format\DateViewHelper

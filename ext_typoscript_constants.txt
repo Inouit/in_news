@@ -18,5 +18,7 @@ plugin.tx_innews {
 		listPage =
 		# cat=plugin.tx_innews//d; type=integer; label=Exclude past events
 		excludePastEvents =
+		# cat=plugin.tx_innews//e; type=integer; label=Do not display those categories
+		notDisplayedCategories =
 	}
 }

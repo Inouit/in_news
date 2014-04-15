@@ -48,7 +48,7 @@ class CategoryController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      */
     public function listAction()
     {
-        $categories = $this->categoryRepository->findAllRecursivly($this->settings);
+        $categories = $this->categoryRepository->findAllRecursivly(0, $this->settings);
         $this->view->assign('categories', $categories);
     }
 

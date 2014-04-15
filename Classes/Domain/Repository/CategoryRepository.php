@@ -34,6 +34,10 @@ namespace Inouit\InNews\Domain\Repository;
  */
 class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRepository {
 
+	/**
+	 * @var \TYPO3\CMS\Extbase\Persistence\QueryInterface Targeted categories
+	 */
+	protected $targetedCategories;
 
 	/**
 	 * Filter only news related to targeted categories
@@ -42,49 +46,61 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
 	 * @param  array $settings
 	 * @return array
 	 */
-	protected function categoriesFilter($matching, $query, $settings) {
-		if($settings['targetedCategories']) {
-			array_push($matching, $query->in('uid', $settings['targetedCategories']));
+	protected function categoriesFilter($query, $settings) {
+		if($settings['targetedCategories'] && $cats = \TYPO3\CMS\Core\Utility\GeneralUtility::intExplode(',', $settings['targetedCategories'])) {
+			return $query->in('uid', $cats);
 		}
 
-		return $matching;
+		return null;
 	}
 
+	/**
+	 * Get children with recursivity
+	 * @param  \TYPO3\CMS\Extbase\Persistence\QueryInterface  $query
+	 * @param  integer $parent
+	 * @param  array   $matching
+	 * @return array
+	 */
+	protected function getChildrenRecursivly($query, $parent = 0, $matching = array()) {
+		// MATCHING
+		$queryMatching = $matching;
+		array_push($queryMatching, $query->equals('parent', (int)$parent));
+		// -- Apply matching
+		$query->matching($query->logicalAnd($queryMatching));
+		$results = $query->execute();
+
+		$cats = array();
+		if($results && count($results)){
+			foreach($results as $k=>$v) {
+				$cats[$v->getUid()] = $v;
+				$cats[$v->getUid()]->setChildren(self::getChildrenRecursivly($query, $v->getUid(), $matching));
+
+			}
+		}
+
+		return $cats;
+	}
 
 	/**
 	 * Find Recursive list
 	 *
 	 * @param array $parent list of parent id
 	 * @param array $settings Typoscript settings
-	 * @return Tx_Extbase_Persistence_QueryInterface
+	 * @return array
 	 */
 	public function findAllRecursivly($parent = 0, $settings) {
 		$query = $this->createQuery();
 
+
 		// MATCHING
-		$matching = array();
-		// $matching = $this->categoriesFilter($matching, $query, $settings);
-		$matching = array_push($matching, $query->equals('parent', (int)$parent));
-		// -- Apply matching
-		$query->matching($query->logicalAnd($matching));
-
-		// $results = $query->matching(
-		// 	$query->logicalAnd(
-		// 		$query->equals('parent', (int)$parent)
-		// 	))->execute();
-		$results = $query->execute();
-		\TYPO3\CMS\Core\Utility\DebugUtility::debug(count($results));
-
-		$cats = array();
-		if($results && count($results)){
-			foreach($results as $k=>$v) {
-				$cats[$v->getUid()] = $v;
-				$cats[$v->getUid()]->setChildren(self::findAllRecursivly($v->getUid()));
-
-			}
+		if( $catsMatching =  $this->categoriesFilter($query, $settings) ){
+			$matching = array($catsMatching);
+		}else {
+			$matching = array();
 		}
 
-		return $cats;
+
+		return $this->getChildrenRecursivly($query, $parent, $matching);
 	}
 }
 ?>

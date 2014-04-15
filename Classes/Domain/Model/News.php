@@ -64,7 +64,7 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     /**
       * List of categories
       *
-      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
+      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Inouit\InNews\Domain\Model\Category>
       */
      protected $categories;
 
