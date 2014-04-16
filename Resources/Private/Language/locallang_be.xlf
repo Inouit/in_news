@@ -29,7 +29,7 @@
 			<trans-unit id="flexform.targetedCategoriesUnion"><source>Targeted categories union</source></trans-unit>
 			<trans-unit id="flexform.targetedCategoriesUnion.or"><source>OR (one of those categories)</source></trans-unit>
 			<trans-unit id="flexform.targetedCategoriesUnion.and"><source>AND (all of those categories)</source></trans-unit>
-			<trans-unit id="flexform.targetedCategoriesUnion.any"><source>ANY (any of those categories)</source></trans-unit>
+			<trans-unit id="flexform.targetedCategoriesUnion.any"><source>EXCLUDE (none of those categories)</source></trans-unit>
 
 			<trans-unit id="flexform.excludePastEvents"><source>Exclude past events</source></trans-unit>
 

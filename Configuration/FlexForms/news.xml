@@ -100,6 +100,17 @@
 						</TCEforms>
 					</settings.onlyTop>
 
+
+					<settings.excludePastEvents>
+						<TCEforms>
+							<label>LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.excludePastEvents</label>
+							<displayCond>FIELD:switchableControllerActions:=:News->list</displayCond>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</settings.excludePastEvents>
+
 					<settings.targetedCategories>
 						<TCEforms>
 							<label>LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.targetedCategories</label>
@@ -146,17 +157,6 @@
 							</config>
 						</TCEforms>
 					</settings.targetedCategoriesUnion>
-
-
-					<settings.excludePastEvents>
-						<TCEforms>
-							<label>LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.excludePastEvents</label>
-							<displayCond>FIELD:switchableControllerActions:=:News->list</displayCond>
-							<config>
-								<type>check</type>
-							</config>
-						</TCEforms>
-					</settings.excludePastEvents>
 
 					<settings.limit>
 						<TCEforms>
