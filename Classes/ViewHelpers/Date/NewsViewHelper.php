@@ -15,7 +15,7 @@ class NewsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
      * @param  Inouit\InNews\Domain\Model\News $news targetted news
      * @return string HTML render
      */
-    public function render(Inouit\InNews\Domain\Model\News $news) {
+    public function render(\Inouit\InNews\Domain\Model\News $news) {
         if ($news === NULL) {
             $news = $this->renderChildren();
         }
