@@ -10,8 +10,8 @@
       </trans-unit>
 
 			<trans-unit id="dateFormat" approved="yes">
-				<source>%m/%d/%Y</source>
-        <target state="translated">%d/%m/%Y</target>
+				<source>%B %d %Y</source>
+        <target state="translated">%d %B %Y</target>
       </trans-unit>
 
       <trans-unit id="date.the" approved="yes">

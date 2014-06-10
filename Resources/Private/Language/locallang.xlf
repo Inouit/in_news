@@ -9,7 +9,7 @@
 			</trans-unit>
 
       <trans-unit id="dateFormat">
-        <source>%m/%d/%Y</source>
+        <source>%B %d %Y</source>
       </trans-unit>
 
       <trans-unit id="date.the">
