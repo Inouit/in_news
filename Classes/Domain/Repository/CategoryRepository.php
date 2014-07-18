@@ -98,7 +98,8 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
 		}else {
 			$matching = array();
 		}
-
+		
+		$query->setOrderings(array('sorting' => "ASC"));
 
 		return $this->getChildrenRecursivly($query, $parent, $matching);
 	}
