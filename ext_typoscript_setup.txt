@@ -28,7 +28,9 @@ plugin.tx_innews {
           columns {
             title.mapOnProperty = title
             tx_innews_category_list_page.mapOnProperty = listPage
+            parent.mapOnProperty = parent
             items.mapOnProperty = items
+            tx_innews_category_frontend_hidden.mapOnProperty = frontendHidden
           }
         }
       }
