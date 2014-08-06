@@ -32,7 +32,7 @@ namespace Inouit\InNews\Domain\Model;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
+class Category extends \TYPO3\CMS\Extbase\Domain\Model\Category {
 
 	/**
 	 * @var string
@@ -45,7 +45,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $children;
 
 	/**
-	  * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Inouit\InNews\Domain\Model\Category>
+	  * @var \Inouit\InNews\Domain\Model\Category
 	 */
 	protected $parent;
 
@@ -58,8 +58,6 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @var integer
 	 */
 	protected $frontendHidden;
-
-
 
 	/**
 	 * Getter for title
@@ -101,45 +99,6 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function setChildren($children)
 	{
 		$this->children = $children;
-	}
-
-	/**
-	 * Add a Category
-	 *
-	 * @param \Inouit\InNews\Domain\Model\Category $parent
-	 * @return void
-	 */
-	public function addParent(\Inouit\InNews\Domain\Model\Category $parent) {
-		$this->parent->attach($parent);
-	}
-
-	/**
-	 * Remove a Category
-	 *
-	 * @param \Inouit\InNews\Domain\Model\Category $parentToRemove The Grades to be removed
-	 * @return void
-	 */
-	public function removeParent(\Inouit\InNews\Domain\Model\Category $parentToRemove) {
-		$this->parent->detach($parentToRemove);
-	}
-
-	/**
-	* Returns the Categories
-	*
-	* @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage A storage holding \Inouit\InNews\Domain\Model\Category objects
-	*/
-	public function getParent() {
-		return $this->parent;
-	}
-
-	/**
-	 * Sets the Categories
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $parent One or more \Inouit\InNews\Domain\Model\Category objects
-	 * @return void
-	 */
-	public function setParent(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $parent) {
-		$this->parent = $parent;
 	}
 
 	/**
@@ -191,12 +150,8 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function getShowThisCat()
 	{
-		if ($this->getParent() && $this->getParent()->count() > 0) {
-			$checkFrontendHidden = false;
-			foreach ($this->getParent()->toArray() as $parent) {
-				$checkFrontendHidden = ($checkFrontendHidden || $parent->getShowThisCat());
-			}
-			return $checkFrontendHidden;
+		if (is_object($this->getParent())) {
+			return (false || $this->getParent()->getShowThisCat());
 		}
 		return !$this->frontendHidden;
 	}
