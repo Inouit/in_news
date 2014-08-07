@@ -35,20 +35,20 @@ class NewsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
 
     /**
-     * categoryRepository
-     *
-     * @var \Inouit\InNews\Domain\Repository\CategoryRepository
-     * @inject
-     */
-    protected $categoryRepository;
-
-    /**
      * newsRepository
      *
      * @var \Inouit\InNews\Domain\Repository\NewsRepository
      * @inject
      */
     protected $newsRepository;
+
+    /**
+     * categoryRepository
+     *
+     * @var \Inouit\InNews\Domain\Repository\CategoryRepository
+     * @inject
+     */
+    protected $categoryRepository;
 
     /**
      * listAction
@@ -68,7 +68,19 @@ class NewsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
             $news = $this->newsRepository->findAllBySettings($this->settings);
         }
-        $this->view->assign('news', $news);
+        $this->view->assign('news', $news)
+                    ->assign('settings', $this->settings);
+    }
+
+    /**
+     * action show
+     *
+     * @return void
+     */
+    public function showAction() {
+        $news = $this->newsRepository->findByUid($GLOBALS['TSFE']->id);
+        $this->view->assign('news', $news)
+                    ->assign('settings', $this->settings);
     }
 
 }

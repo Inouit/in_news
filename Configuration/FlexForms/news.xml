@@ -31,6 +31,10 @@
 									<numIndex index="0">LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.display.cat_list</numIndex>
 									<numIndex index="1">Category->list</numIndex>
 								</numIndex>
+								<numIndex index="3">
+									<numIndex index="0">LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:flexform.display.news_show</numIndex>
+									<numIndex index="1">News->show</numIndex>
+								</numIndex>
 							</items>
 						</config>
 						</TCEforms>

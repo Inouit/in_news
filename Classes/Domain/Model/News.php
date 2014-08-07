@@ -175,6 +175,26 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     }
 
     /**
+    * Returns the Media Not First
+    *
+    * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage A storage holding Tx_Inannuaire_Domain_Model_Grades objects
+    */
+    public function getMediaNotFirst() {
+        $medias = null;
+        if (count($this->media)){
+            $cpt = 0;
+            foreach ($this->media as $key => $media) {
+                if ($cpt){
+                    $medias[$key] = $media;
+                }else{
+                    $cpt = 1;
+                }
+            }
+        }
+        return $medias;
+    }
+
+    /**
     * Returns the Media
     *
     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage A storage holding Tx_Inannuaire_Domain_Model_Grades objects

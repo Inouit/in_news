@@ -10,8 +10,9 @@
 
 			<trans-unit id="flexform.display"><source>Display</source></trans-unit>
 			<trans-unit id="flexform.display.cat_list"><source>Categories list</source></trans-unit>
-      <trans-unit id="flexform.display.news_list"><source>News list</source></trans-unit>
-      <trans-unit id="flexform.display.news_list_future_event"><source>Future events list</source></trans-unit>
+			<trans-unit id="flexform.display.news_list"><source>News list</source></trans-unit>
+			<trans-unit id="flexform.display.news_show"><source>News show</source></trans-unit>
+			<trans-unit id="flexform.display.news_list_future_event"><source>Future events list</source></trans-unit>
 
 			<trans-unit id="flexform.orderBy"><source>Order by</source></trans-unit>
 			<trans-unit id="flexform.orderBy.displayDate"><source>Display date</source></trans-unit>

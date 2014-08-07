@@ -1,0 +1,9 @@
+{namespace in=Inouit\InNews\ViewHelpers}
+
+<f:layout name="Default" />
+<f:section name="main">
+
+  <f:render partial="News/categories" arguments="{items: news.categories, settings:settings}" /><p class="date"><in:date.news news="{news}"/></p>
+  <h1 class="h1-like"><f:link.page pageUid="{news.uid}">{news.title}</f:link.page></h1>
+  <f:render partial="News/media" arguments="{item: newsItem, settings:settings}" />
+</f:section>

@@ -7,12 +7,12 @@ if (!defined('TYPO3_MODE')) {
 	'Inouit.' . $_EXTKEY,
 	'Pi1',
 	array(
-		'News' => 'list',
+		'News' => 'list, show',
 		'Category' => 'list',
 	),
 	// non-cacheable actions
 	array(
-		'News' => 'list',
+		'News' => 'list, show',
 		'Category' => '',
 	)
 );
