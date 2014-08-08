@@ -179,7 +179,7 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     *
     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage A storage holding Tx_Inannuaire_Domain_Model_Grades objects
     */
-    public function getMediaNotFirst() {
+    public function getNotFirstMedia() {
         $medias = null;
         if (count($this->media)){
             $cpt = 0;
@@ -272,29 +272,6 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function setStarttime($starttime) {
 		$this->starttime = $starttime;
 	}
-
-	// /**
-	//  * sets the media
-	//  *
-	//  * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $media
-	//  *
-	//  * @return void
-	//  */
-	// public function setMedia($media) {
-	// 	$this->media = $media;
-	// }
-
-	// *
-	//  * get the media
-	//  *
-	//  * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference
-
-	// public function getMedia() {
-	// 	if ($this->media instanceof \TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy) {
-	// 		$this->media->_loadRealInstance();
-	// 	}
-	// 	return ($this->media ? $this->media->getOriginalResource() : null);
-	// }
 
     /**
      * Getter for displayDate
@@ -409,7 +386,6 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
         return $this->further;
     }
 
-
     /**
      * Setter for further
      *
@@ -419,6 +395,23 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     public function setFurther($further) {
         $this->further = $further;
         return $this;
+    }
+
+    /**
+     * get Number Show Category
+     *
+     * @return boolean
+     */
+    public function getNbrShowCategories() {
+        $findShowCat = false;
+        if ($this->getCategories() && $this->getCategories()->count()){
+            foreach ($this->getCategories() as $categorie) {
+                if ( $categorie->getShowThisCat() ){
+                    $findShowCat == true;
+                }
+            }
+        }
+        return $findShowCat;
     }
 
 }
