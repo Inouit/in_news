@@ -407,7 +407,7 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
         if ($this->getCategories() && $this->getCategories()->count()){
             foreach ($this->getCategories() as $categorie) {
                 if ( $categorie->getShowThisCat() ){
-                    $findShowCat == true;
+                    $findShowCat = true;
                 }
             }
         }
