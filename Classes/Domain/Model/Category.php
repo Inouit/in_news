@@ -1,6 +1,9 @@
 <?php
 namespace Inouit\InNews\Domain\Model;
 
+
+use TYPO3\CMS\Core\Utility\File\BasicFileUtility;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -67,6 +70,16 @@ class Category extends \TYPO3\CMS\Extbase\Domain\Model\Category {
 	public function getTitle()
 	{
 		return $this->title;
+	}
+
+	/**
+	 * Getter for title
+	 *
+	 * @return mixed
+	 */
+	public function getTitleClass()
+	{
+		return BasicFileUtility::cleanFileName($this->title);
 	}
 
 	/**
