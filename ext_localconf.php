@@ -17,4 +17,8 @@ if (!defined('TYPO3_MODE')) {
 	)
 );
 
+// define top panel shorcut
+$GLOBALS['TYPO3_CONF_VARS']['BE']['defaultUserTSconfig'] .= '
+  options.pageTree.doktypesToShowInNewPageDragArea = 1,180,6,4,7,3,254,255,199';
+
 ?>

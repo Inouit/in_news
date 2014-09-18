@@ -170,13 +170,13 @@ for($i=0; $i < $newPageTypeOrder; $i++) {
 for($i=$newPageTypeOrder; $i < count($TCA['pages']['columns']['doktype']['config']['items']); $i++) {
     $temp[$i+1] = $TCA['pages']['columns']['doktype']['config']['items'][$i];
 }
-$temp[$newPageTypeOrder] = array ('0' => 'LLL:EXT:in_news/Resources/Private/Language/locallang_db.xlf:tx_innews_domain_model_news',
-                                    '1' => $newsDoktype);
+$temp[$newPageTypeOrder] = array ('LLL:EXT:in_news/Resources/Private/Language/locallang_db.xlf:tx_innews_domain_model_news',
+                                    $newsDoktype,
+                                    '../typo3conf/ext/in_news/Resources/Public/Icons/news.png');
+t3lib_SpriteManager::addTcaTypeIcon('pages', $newsDoktype, '../typo3conf/ext/in_news/Resources/Public/Icons/news.png');
+
 $TCA['pages']['columns']['doktype']['config']['items'] = $temp;
 ksort($TCA['pages']['columns']['doktype']['config']['items']);
-
-$PAGES_TYPES[$newsDoktype] = Array('icon' => "EXT:".$_EXTKEY."/Resources/Public/icons/news.png",
-                                    'allowedTables' => '*',);
 $TCA['pages']['types'][$newsDoktype]['showitem'] = $TCA['pages']['types'][1]['showitem'];
 
 
