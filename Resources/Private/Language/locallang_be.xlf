@@ -6,6 +6,10 @@
 			<trans-unit id="plugin.name"><source>News</source></trans-unit>
 			<trans-unit id="plugin.description"><source>Manage news and events with pages and typo3 categories</source></trans-unit>
 
+			<trans-unit id="conf.hideNewsInPageTree"><source>Hide news in pagetree</source></trans-unit>
+			<trans-unit id="conf.newsDoktype"><source>News Doktype ID</source></trans-unit>
+
+
 			<trans-unit id="flexform.sheet_title"><source>Settings</source></trans-unit>
 
 			<trans-unit id="flexform.display"><source>Display</source></trans-unit>

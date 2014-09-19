@@ -17,8 +17,17 @@ if (!defined('TYPO3_MODE')) {
 	)
 );
 
+
 // define top panel shorcut
+$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY]);
 $GLOBALS['TYPO3_CONF_VARS']['BE']['defaultUserTSconfig'] .= '
-  options.pageTree.doktypesToShowInNewPageDragArea = 1,180,6,4,7,3,254,255,199';
+  options.pageTree.doktypesToShowInNewPageDragArea = 1,'.$extConf['newsDoktype'].',6,4,7,3,254,255,199';
+
+// Manage news display in pagetree
+$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY]);
+if($extConf['hideNewsInPageTree']) {
+	$GLOBALS['TYPO3_CONF_VARS']['BE']['defaultUserTSconfig'] .= '
+	  options.pageTree.excludeDoktypes = '.$extConf['newsDoktype'];
+}
 
 ?>

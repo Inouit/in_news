@@ -6,6 +6,9 @@
 			<trans-unit id="plugin.name" approved="yes"><source>News</source><target state="translated">Actualités</target></trans-unit>
 			<trans-unit id="plugin.description" approved="yes"><source>Manage news and events with pages and typo3 categories</source><target state="translated">Gérez vos actualités et vos événements avec les pages et les catégories de Typo3</target></trans-unit>
 
+			<trans-unit id="conf.hideNewsInPageTree" approved="yes"><source>Hide news in pagetree</source><target state="translated">Cacher les news dans l'arborescence</target></trans-unit>
+			<trans-unit id="conf.newsDoktype" approved="yes"><source>News Doktype ID</source><target state="translated">Identifiant doktype des actualités</target></trans-unit>
+
 			<trans-unit id="flexform.sheet_title" approved="yes"><source>Settings</source><target state="translated">Paramètres</target></trans-unit>
 			<trans-unit id="flexform.display" approved="yes"><source>Display</source><target state="translated">Affichage</target></trans-unit>
 			<trans-unit id="flexform.display.cat_list" approved="yes"><source>Categories list</source><target state="translated">Liste des catégories</target></trans-unit>
