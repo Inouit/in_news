@@ -11,6 +11,9 @@
 			<trans-unit id="tx_innews_domain_model_category.list_page">
 				<source>Page used for listing</source>
 			</trans-unit>
+      <trans-unit id="tx_innews_domain_model_category.tx_innews_category_frontend_hidden">
+        <source>Don't show on Frontend:</source>
+      </trans-unit>
 
 
 			<trans-unit id="tx_innews_news.informations">

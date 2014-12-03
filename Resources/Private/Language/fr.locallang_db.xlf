@@ -13,6 +13,10 @@
 				<source>Page used for listing</source>
 				<target state="translated">Page de listing des actualités</target>
 			</trans-unit>
+      <trans-unit id="tx_innews_domain_model_category.tx_innews_category_frontend_hidden"> 
+      	<source>Don't show on Frontend:</source> 
+      	<target>Cacher dans le frontend :</target>
+      </trans-unit>
 
 			<trans-unit id="tx_innews_news.informations" approved="yes">
 				<source>News informations</source>

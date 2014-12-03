@@ -54,14 +54,14 @@ $tmp_in_news_category_columns = array(
 $tmp_in_news_category_columns = array(
     'tx_innews_category_frontend_hidden' => array (
         'exclude' => 0,
-        'label' => 'LLL:EXT:skin/Resources/Private/Language/locallang_db.xlf:tx_innews_domain_model_category.tx_innews_category_frontend_hidden',
+        'label' => 'LLL:EXT:in_news/Resources/Private/Language/locallang_db.xlf:tx_innews_domain_model_category.tx_innews_category_frontend_hidden',
         'config' => array(
             'type' => 'check',
         ),
     ),
 );
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('sys_category',$tmp_in_news_category_columns);
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('sys_category','tx_innews_category_frontend_hidden', '', 'after:title');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('sys_category','tx_innews_category_frontend_hidden', '', 'after:hidden');
 
 
 // Pages TCA for news
