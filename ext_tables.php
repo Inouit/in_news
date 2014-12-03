@@ -11,7 +11,7 @@ if (!defined('TYPO3_MODE')) {
 );
 
 // Wizard pi1
-$extensionName = t3lib_div::underscoredToUpperCamelCase($_EXTKEY);
+$extensionName = TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToUpperCamelCase($_EXTKEY);
 $pluginSignature = strtolower($extensionName) . '_pi1';
 if (TYPO3_MODE == 'BE') {
     $TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses'][$pluginSignature . '_wizicon'] =
@@ -162,7 +162,7 @@ $TCA['pages']['palettes']['eventInfos'] = array(
     'showitem' => ' tx_innews_event_from, tx_innews_event_to, --linebreak--,,');
 
 // News doktype
-t3lib_div::loadTCA('pages');
+// TYPO3\CMS\Core\Utility\GeneralUtility::loadTCA('pages');
 $newPageTypeOrder = 2;
 for($i=0; $i < $newPageTypeOrder; $i++) {
     $temp[$i] = $TCA['pages']['columns']['doktype']['config']['items'][$i];
@@ -173,7 +173,7 @@ for($i=$newPageTypeOrder; $i < count($TCA['pages']['columns']['doktype']['config
 $temp[$newPageTypeOrder] = array ('LLL:EXT:in_news/Resources/Private/Language/locallang_db.xlf:tx_innews_domain_model_news',
                                     $newsDoktype,
                                     '../typo3conf/ext/in_news/Resources/Public/Icons/news.gif');
-t3lib_SpriteManager::addTcaTypeIcon('pages', $newsDoktype, '../typo3conf/ext/in_news/Resources/Public/Icons/news.gif');
+TYPO3\CMS\Backend\Sprite\SpriteManager::addTcaTypeIcon('pages', $newsDoktype, '../typo3conf/ext/in_news/Resources/Public/Icons/news.gif');
 
 $TCA['pages']['columns']['doktype']['config']['items'] = $temp;
 ksort($TCA['pages']['columns']['doktype']['config']['items']);
@@ -181,7 +181,7 @@ $TCA['pages']['types'][$newsDoktype]['showitem'] = $TCA['pages']['types'][1]['sh
 
 
 // Flexform
-$extensionName = t3lib_div::underscoredToUpperCamelCase($_EXTKEY);
+$extensionName = TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToUpperCamelCase($_EXTKEY);
 $pluginSignature = strtolower($extensionName) . '_pi1';
 
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
