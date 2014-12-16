@@ -86,6 +86,7 @@ class NewsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	protected function applySettings($query, $settings) {
 		// MATCHING
 		$matching = array();
+		$matching = $this->dateFilter($matching, $query, $settings);
 		$matching = $this->onlyTopFilter($matching, $query, $settings);
 		$matching = $this->categoriesFilter($matching, $query, $settings);
 		$matching = $this->excludePastEventsFilter($matching, $query, $settings);
@@ -101,6 +102,67 @@ class NewsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		$query = $this->setLimit($query, $settings);
 
 		return $query;
+	}
+
+	/**
+	 * Filter news by start date and duration
+	 * @param  array $matching current constraints
+	 * @param  \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
+	 * @param  array $settings
+	 * @return array
+	 */
+	protected function dateFilter($matching, $query, $settings) {
+		if($settings['dateRange'] && $settings['dateRange']['start'] && trim($settings['dateRange']['start']) != '') {
+			$startdate = new \DateTime($settings['dateRange']['start']);
+			$enddate = clone($startdate);
+			$enddate->add(\DateInterval::createFromDateString($settings['dateRange']['duration']));
+			
+			$starttime = $startdate->getTimestamp();
+			$endtime = $enddate->getTimestamp();
+
+			array_push($matching, 
+				$query->logicalOr(
+					$query->logicalAnd(
+						$query->greaterThan('displayDate', 0),
+						$query->logicalOr(
+							$query->equals('displayDate', $starttime),
+							$query->logicalAnd(
+								$query->greaterThan('displayDate', $starttime),
+								$query->lessThan('displayDate', $endtime)
+							)
+						)
+					),
+					$query->logicalAnd(
+						$query->greaterThan('from', 0),
+						$query->logicalOr(
+							$query->equals('from', $starttime),
+							$query->logicalAnd(
+								$query->greaterThan('from', $starttime),
+								$query->lessThanOrEqual('from', $endtime)
+							)
+						)
+					),
+					$query->logicalAnd(
+						$query->greaterThan('to', 0),
+						$query->logicalOr(
+							$query->equals('to', $starttime),
+							$query->logicalAnd(
+								$query->greaterThan('to', $starttime),
+								$query->lessThan('to', $endtime)
+							)
+						)
+					),
+					$query->logicalAnd(
+						$query->greaterThan('from', 0),
+						$query->greaterThan('to', 0),
+						$query->lessThanOrEqual('from', $starttime),
+						$query->greaterThanOrEqual('to', $endtime)
+					)
+				)
+			);
+		}
+
+		return $matching;
 	}
 
 	/**
@@ -158,7 +220,6 @@ class NewsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	protected function excludePastEventsFilter($matching, $query, $settings) {
 		if($settings['excludePastEvents'] == 1) {
 			$limit = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
-			\TYPO3\CMS\Core\Utility\DebugUtility::debug($limit);
 			array_push($matching, $query->logicalOr(
 				$query->greaterThanOrEqual('to', $limit),
 				$query->greaterThanOrEqual('displayDate', $limit)
