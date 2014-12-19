@@ -9,23 +9,20 @@
 			</trans-unit>
 
       <trans-unit id="dateFormat">
-        <source>%B %d %Y</source>
+        <source><![CDATA[%B %d %Y]]></source>
       </trans-unit>
 
       <trans-unit id="date.the">
-        <source>The </source>
+        <source><![CDATA[The %0s]]></source>
       </trans-unit>
-      <trans-unit id="date.from">
-        <source>From </source>
-      </trans-unit>
-      <trans-unit id="date.to">
-        <source>To </source>
+      <trans-unit id="date.fromTo">
+        <source><![CDATA[From %0s to %1s]]></source>
       </trans-unit>
       <trans-unit id="date.fromOnly">
-        <source>From </source>
+        <source><![CDATA[From %0s]]></source>
       </trans-unit>
       <trans-unit id="date.toOnly">
-        <source>Until </source>
+        <source><![CDATA[Until %0s]]></source>
       </trans-unit>
 
 		</body>

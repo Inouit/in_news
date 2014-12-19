@@ -4,40 +4,20 @@
 		<header/>
 		<body>
 
-      <trans-unit id="tx_innews_domain_model_news" approved="yes">
-        <source>News</source>
-        <target state="translated">Actualités</target>
-      </trans-unit>
+			<trans-unit id="tx_innews_domain_model_news" approved="yes">
+				<source>News</source> <target state="translated">Actualités</target></trans-unit>
 
-			<trans-unit id="dateFormat" approved="yes">
-				<source>%B %d %Y</source>
-        <target state="translated">%d %B %Y</target>
-      </trans-unit>
+      <trans-unit id="dateFormat" approved="yes">
+        <source><![CDATA[%B %d %Y]]></source> <target state="translated"><![CDATA[%d %B %Y]]></target></trans-unit>
 
       <trans-unit id="date.the" approved="yes">
-        <source>The </source>
-        <target state="translated">Le </target>
-      </trans-unit>
-
-      <trans-unit id="date.from" approved="yes">
-        <source>From </source>
-        <target state="translated">Du </target>
-      </trans-unit>
-
-      <trans-unit id="date.to" approved="yes">
-        <source>To </source>
-        <target state="translated"> au </target>
-      </trans-unit>
-
+        <source><![CDATA[The %0s]]></source> <target state="translated"><![CDATA[Le %0s]]></target></trans-unit>
+      <trans-unit id="date.fromTo" approved="yes">
+        <source><![CDATA[From %0s to %1s]]></source> <target state="translated"><![CDATA[Du %0s au %1s]]></target></trans-unit>
       <trans-unit id="date.fromOnly" approved="yes">
-        <source>From </source>
-        <target state="translated">À partir du </target>
-      </trans-unit>
-
+        <source><![CDATA[From %0s]]></source> <target state="translated"><![CDATA[À partir du %0s]]></target></trans-unit>
       <trans-unit id="date.toOnly" approved="yes">
-        <source>Until </source>
-        <target state="translated">Jusqu'au </target>
-      </trans-unit>
+        <source><![CDATA[Until %0s]]></source> <target state="translated"><![CDATA[Jusqu'au %0s]]></target></trans-unit>
 
 		</body>
 	</file>

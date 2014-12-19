@@ -20,52 +20,74 @@ class NewsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
      * @return string HTML render
      */
     public function render(\Inouit\InNews\Domain\Model\News $news = NULL, $dDate = 0, $dFrom = 0, $dTo = 0) {
-        if ($news != NULL) {
-            $displayDate = $news->getDisplayDate();
-            $from = $news->getFrom();
-            $to = $news->getTo();
-        }else{
-            if($dDate != 0){
-                $displayDate = new \Datetime();
-                $displayDate->setTimestamp($dDate);
-            }
-            if($dFrom != 0){
-                $from = new \Datetime();
-                $from->setTimestamp($dFrom);
-            }
-            if($dTo != 0){
-                $to = new \Datetime();
-                $to->setTimestamp($dTo);
-            }
+      if ($news != NULL) {
+        $displayDate = $news->getDisplayDate();
+        $from = $news->getFrom();
+        $to = $news->getTo();
+      }else{
+        if($dDate != 0){
+          $displayDate = new \Datetime();
+          $displayDate->setTimestamp($dDate);
         }
+        if($dFrom != 0){
+          $from = new \Datetime();
+          $from->setTimestamp($dFrom);
+        }
+        if($dTo != 0){
+          $to = new \Datetime();
+          $to->setTimestamp($dTo);
+        }
+      }
 
-        if($displayDate == 0 && $from == 0 && $to == 0){
-            $content = $this->renderChildren();
-        }else {
-            $llKey = 'LLL:EXT:in_news/Resources/Private/Language/locallang.xlf:';
+      if($displayDate == 0 && $from == 0 && $to == 0){
+        $content = $this->renderChildren();
+      }else {
+        $llKey = 'LLL:EXT:in_news/Resources/Private/Language/locallang.xlf:';
 
-            $class='';
-            $content = '';
+        $class='';
+        $content = '';
 
             if($displayDate || ($from == $to && $from != 0)) {                                  // Same day
-                $content = $GLOBALS['TSFE']->sL($llKey.'date.the').$this->formatDate->render(($displayDate ? $displayDate : $from), $GLOBALS['TSFE']->sL($llKey.'dateFormat'));
+              $content = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('date.the',
+                'in_news',
+                array(
+                  $this->formatDate->render(($displayDate ? $displayDate : $from), \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('dateFormat', 'in_news'))
+                  ));
             }else {
-                if($from && $to) {
+              if($from && $to) {
                     if($from->getTimeStamp() < time() && $to->getTimeStamp() > time() ){        // Until day
-                        $content = $GLOBALS['TSFE']->sL($llKey.'date.toOnly').$this->formatDate->render($to, $GLOBALS['TSFE']->sL($llKey.'dateFormat'));
+                      $content = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('date.toOnly',
+                        'in_news',
+                        array(
+                          $this->formatDate->render($to, \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('dateFormat', 'in_news'))
+                          ));
                     }else {                                                                     // Different days
-                        $content = $GLOBALS['TSFE']->sL($llKey.'date.from').$this->formatDate->render($from, $GLOBALS['TSFE']->sL($llKey.'dateFormat')).$GLOBALS['TSFE']->sL($llKey.'date.to').$this->formatDate->render($to, $GLOBALS['TSFE']->sL($llKey.'dateFormat'));
+                      $content = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('date.fromTo', 
+                        'in_news',
+                        array(
+                          $this->formatDate->render($from, \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('dateFormat', 'in_news')),
+                          $this->formatDate->render($to, \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('dateFormat', 'in_news'))
+                          )
+                        );
                     }
-                }else {
+                  }else {
                     if($from) {                                                                 // From day
-                        $content = $GLOBALS['TSFE']->sL($llKey.'date.fromOnly').$this->formatDate->render($from, $GLOBALS['TSFE']->sL($llKey.'dateFormat'));
+                      $content = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('date.fromOnly',
+                        'in_news',
+                        array(
+                          $this->formatDate->render($from, \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('dateFormat', 'in_news'))
+                          ));
                     }else {                                                                     // Until day
-                        $content = $GLOBALS['TSFE']->sL($llKey.'date.toOnly').$this->formatDate->render($to, $GLOBALS['TSFE']->sL($llKey.'dateFormat'));
+                      $content = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('date.toOnly',
+                        'in_news',
+                        array(
+                          $this->formatDate->render($to, \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('dateFormat', 'in_news'))
+                          ));
                     }
+                  }
                 }
-            }
-        }
+              }
 
-        return $content;
-    }
-}
+              return $content;
+            }
+          }
