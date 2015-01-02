@@ -34,10 +34,20 @@ namespace Inouit\InNews\Domain\Repository;
  */
 class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRepository {
 
+  /**
+   * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
+   * @inject
+   */
+  protected $configurationManager;
+
 	/**
 	 * @var \TYPO3\CMS\Extbase\Persistence\QueryInterface Targeted categories
 	 */
 	protected $targetedCategories;
+
+  public function initializeObject() {
+   $this->setDefaultQuerySettings($this->getQuerySettings());
+  } 
 
 	/**
 	 * Filter only news related to targeted categories
@@ -73,7 +83,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
 		if($results && count($results)){
 			foreach($results as $k=>$v) {
 				$cats[$v->getUid()] = $v;
-				$cats[$v->getUid()]->setChildren(self::getChildrenRecursivly($query, $v->getUid(), $matching));
+				$cats[$v->getUid()]->setChildren($this->getChildrenRecursivly($query, $v->getUid(), $matching));
 
 			}
 		}
@@ -98,10 +108,44 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
 		}else {
 			$matching = array();
 		}
+
+		// storage Pid
+		// $matching = array_push($matching, $query->in('pid', $this->getStoragePageIds()));
+		$query->matching($query->logicalAnd(array_push($matching, $query->in('pid', $this->getStoragePageIds()))));
 		
+		// order by
 		$query->setOrderings(array('sorting' => "ASC"));
 
 		return $this->getChildrenRecursivly($query, $parent, $matching);
 	}
+
+  /**
+   * get the storage page ids list depending on EXT settings
+   */
+  private function getQuerySettings() {
+    $querySettings = $this->objectManager->get('\TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings');
+    $querySettings->setStoragePageIds($this->getStoragePageIds());
+    $querySettings->setRespectStoragePage(TRUE);
+
+    return $querySettings;
+  }
+
+  /**
+   * get the storage page ids list depending on EXT settings
+   * @return array
+   */
+  private function getStoragePageIds(){
+    $configuration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
+    $configuration = $configuration['plugin.']['tx_innews.'];
+    $configurationPlugin = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+
+    $configuration['persistence.'] = array_merge($configuration['persistence.'], $configurationPlugin['persistence']);
+    
+    $pids = trim($configuration['persistence.']['storagePid']) ? \TYPO3\CMS\Extbase\Utility\ArrayUtility::trimExplode(',', $configuration['persistence.']['storagePid']) : array($GLOBALS['TSFE']->id);
+    $intAbs = function($item) {
+      return abs(intVal(trim($item)));
+    };
+    return array_map($intAbs, $pids);
+  }
 }
 ?>
