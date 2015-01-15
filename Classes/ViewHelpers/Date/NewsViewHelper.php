@@ -19,7 +19,11 @@ class NewsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
      * @param  mixed $to
      * @return string HTML render
      */
-    public function render(\Inouit\InNews\Domain\Model\News $news = NULL, $dDate = 0, $dFrom = 0, $dTo = 0) {
+    public function render(\Inouit\InNews\Domain\Model\News $news = NULL, $dDate = 0, $dFrom = 0, $dTo = 0, $dateFormat = '') {
+      if(!$dateFormat) {
+        $dateFormat = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('dateFormat', 'in_news');
+      }
+
       if ($news != NULL) {
         $displayDate = $news->getDisplayDate();
         $from = $news->getFrom();
@@ -51,7 +55,7 @@ class NewsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
               $content = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('date.the',
                 'in_news',
                 array(
-                  $this->formatDate->render(($displayDate ? $displayDate : $from), \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('dateFormat', 'in_news'))
+                  $this->formatDate->render(($displayDate ? $displayDate : $from), $dateFormat)
                   ));
             }else {
               if($from && $to) {
@@ -59,14 +63,14 @@ class NewsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
                       $content = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('date.toOnly',
                         'in_news',
                         array(
-                          $this->formatDate->render($to, \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('dateFormat', 'in_news'))
+                          $this->formatDate->render($to, $dateFormat)
                           ));
                     }else {                                                                     // Different days
                       $content = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('date.fromTo', 
                         'in_news',
                         array(
-                          $this->formatDate->render($from, \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('dateFormat', 'in_news')),
-                          $this->formatDate->render($to, \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('dateFormat', 'in_news'))
+                          $this->formatDate->render($from, $dateFormat),
+                          $this->formatDate->render($to, $dateFormat)
                           )
                         );
                     }
@@ -75,13 +79,13 @@ class NewsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
                       $content = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('date.fromOnly',
                         'in_news',
                         array(
-                          $this->formatDate->render($from, \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('dateFormat', 'in_news'))
+                          $this->formatDate->render($from, $dateFormat)
                           ));
                     }else {                                                                     // Until day
                       $content = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('date.toOnly',
                         'in_news',
                         array(
-                          $this->formatDate->render($to, \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('dateFormat', 'in_news'))
+                          $this->formatDate->render($to, $dateFormat)
                           ));
                     }
                   }
