@@ -54,10 +54,10 @@ if($extConf['hideNewsInPageTree']) {
 			}
 		}
 	}
-}
-if(!$inserted) {
-	$GLOBALS['TYPO3_CONF_VARS']['BE']['defaultUserTSconfig'] .= '
-		options.pageTree.excludeDoktypes = '.$extConf['newsDoktype'];
+	if(!$inserted) {
+		$GLOBALS['TYPO3_CONF_VARS']['BE']['defaultUserTSconfig'] .= '
+			options.pageTree.excludeDoktypes = '.$extConf['newsDoktype'];
+	}
 }
 
 ?>
