@@ -24,7 +24,7 @@ class NewsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
       $dateFormat = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('dateFormat', 'in_news');
     }
 
-    if ($news != NULL && $news instanceof Inouit\InNews\Domain\Model\News) {
+    if ($news != NULL && $news instanceof \Inouit\InNews\Domain\Model\News) {
       $displayDate = $news->getDisplayDate();
       $from = $news->getFrom();
       $to = $news->getTo();
@@ -47,7 +47,6 @@ class NewsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
         $to->setTimestamp($dTo);
       }
     }
-
     if($displayDate == 0 && $from == 0 && $to == 0){
       $content = $this->renderChildren();
     }else {
