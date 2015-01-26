@@ -188,8 +188,35 @@ class NewsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * @return array
 	 */
 	protected function categoriesFilter($matching, $query, $settings) {
-		if($settings['targetedCategories'] && $cats = \TYPO3\CMS\Core\Utility\GeneralUtility::intExplode(',', $settings['targetedCategories'])) {
+		if($settings['targetedCategories']) {
+			return (strpos($settings['targetedCategories'], '&') == FALSE ? $this->oneLevelFilter($matching, $query, $settings) : $this->multiLevelFilter($matching, $query, $settings));
+		}else {
+			return $matching;
+		}
+	}
+
+	protected function multiLevelFilter($matching, $query, $settings) {
+		$groups = explode('&', $settings['targetedCategories']);
+
+		$matching2 = array();
+		foreach($groups as $group) {
+			if($cats = \TYPO3\CMS\Core\Utility\GeneralUtility::intExplode(',', $group)) {
+				$matching3 = array();
+				foreach($cats as $cat) {
+					array_push($matching3, $query->contains('categories', $cat));
+				}
+				array_push($matching2, $query->logicalOr($matching3));
+			}
+		}
+		array_push($matching, $query->logicalAnd($matching2));
+
+		return $matching;
+	}
+
+	protected function oneLevelFilter($matching, $query, $settings) {
+		if($cats = \TYPO3\CMS\Core\Utility\GeneralUtility::intExplode(',', $settings['targetedCategories'])) {
 			$matching2 = array();
+
 			foreach($cats as $cat) {
 				array_push($matching2, $query->contains('categories', $cat));
 			}

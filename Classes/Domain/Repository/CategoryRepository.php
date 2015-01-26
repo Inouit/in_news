@@ -42,6 +42,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
 
 	/**
 	 * @var \TYPO3\CMS\Extbase\Persistence\QueryInterface Targeted categories
+   * @lazy 
 	 */
 	protected $targetedCategories;
 
@@ -118,6 +119,18 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
 
 		return $this->getChildrenRecursivly($query, $parent, $matching);
 	}
+
+  /**
+   * find categories by news
+   * @param  \Inouit\InNews\Domain\Model\News $news [description]
+   * @return [type]                                [description]
+   */
+  public function findByNews(\Inouit\InNews\Domain\Model\News $news) {
+      $query = $this->createQuery();
+      // $query->matching($query->logicalAnd());
+      $query->setLimit(1);
+      return $query->execute();
+  }
 
   /**
    * get the storage page ids list depending on EXT settings

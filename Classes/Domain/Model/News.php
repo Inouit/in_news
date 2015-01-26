@@ -44,38 +44,38 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      */
     protected $title;
 
-	/**
-	 * @var DateTime
-	 */
+  /**
+   * @var DateTime
+   */
     protected $crdate;
 
-	/**
-	 * @var DateTime
-	 */
+  /**
+   * @var DateTime
+   */
     protected $starttime;
 
-	/**
-	 * media
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
- 	 * @lazy
-	 */
-	protected $media;
+  /**
+   * media
+   * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+   */
+  protected $media;
 
-    /**
-      * List of categories
-      *
-      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Inouit\InNews\Domain\Model\Category>
-      */
-     protected $categories;
+  /**
+    * List of categories
+    *
+    * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Inouit\InNews\Domain\Model\Category>
+    * @lazy
+    */
+   protected $categories;
 
-    /**
-     * @var boolean
-     */
-    protected $top;
+  /**
+   * @var boolean
+   */
+  protected $top;
 
-	/**
-	 * @var string
-	 */
+  /**
+   * @var string
+   */
     protected $teaser;
 
   /**
@@ -83,14 +83,14 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
    */
     protected $displayDate;
 
-	/**
-	 * @var DateTime
-	 */
+  /**
+   * @var DateTime
+   */
     protected $from;
 
-	/**
-	 * @var DateTime
-	 */
+  /**
+   * @var DateTime
+   */
     protected $to;
 
     /**
@@ -107,38 +107,98 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     }
 
     /**
-     * Add a Category
+     * Populate the object
      *
-     * @param Tx_Inannuaire_Domain_Model_Grades $categories
+     * @param  array  $datas
      * @return void
      */
-    public function addCategories(Tx_Inannuaire_Domain_Model_Grades $categories) {
+    public function __populate(array $datas = array()) {
+      if(count($datas)){
+        if($datas['tx_innews_news_top']) {
+          $datas['top'] = $datas['tx_innews_news_top'];
+          unset($datas['tx_innews_news_top']);
+        }
+        if($datas['tx_innews_news_teaser']) {
+          $datas['teaser'] = $datas['tx_innews_news_teaser'];
+          unset($datas['tx_innews_news_teaser']);
+        }
+        if($datas['tx_innews_event_further']) {
+          $datas['further'] = $datas['tx_innews_event_further'];
+          unset($datas['tx_innews_event_further']);
+        }
+        if($datas['tx_innews_news_display_date']) {
+          $datas['displayDate'] = new \DateTime();
+          $datas['displayDate']->setTimestamp($datas['tx_innews_news_display_date']);
+          unset($datas['tx_innews_news_display_date']);
+        }
+        if($datas['tx_innews_event_from']) {
+          $datas['from'] = new \DateTime();
+          $datas['from']->setTimestamp($datas['tx_innews_event_from']);
+          unset($datas['tx_innews_event_from']);
+        }
+        if($datas['tx_innews_event_to']) {
+          $datas['to'] = new \DateTime();
+          $datas['to']->setTimestamp($datas['tx_innews_event_to']);
+          unset($datas['tx_innews_event_to']);
+        }
+        if($datas['categories']) {
+          $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
+          $datas['categories'] = $objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\LazyObjectStorage', $this, 'categories', $datas['categories']);
+        }
+        if($datas['media']) {
+          $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
+          $datas['media'] = $objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\LazyObjectStorage', $this, 'media', $datas['media']);
+        }
+        foreach($datas as $key=>$value){
+          $this->_setProperty($key, $value);
+        }
+      }
+
+      $this->__wakeup();
+    }
+
+    /**
+     * Add a Category
+     *
+     * @param \Inouit\InNews\Domain\Model\Category $categories
+     * @return void
+     */
+    public function addCategories(\Inouit\InNews\Domain\Model\Category $categories) {
         $this->categories->attach($categories);
     }
 
     /**
      * Remove a Category
      *
-     * @param Tx_Inannuaire_Domain_Model_Grades $categoriesToRemove The Grades to be removed
+     * @param \Inouit\InNews\Domain\Model\Category $categoriesToRemove The Grades to be removed
      * @return void
      */
-    public function removeCategories(Tx_Inannuaire_Domain_Model_Grades $categoriesToRemove) {
+    public function removeCategories(\Inouit\InNews\Domain\Model\Category $categoriesToRemove) {
         $this->categories->detach($categoriesToRemove);
     }
 
     /**
     * Returns the Categories
     *
-    * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage A storage holding Tx_Inannuaire_Domain_Model_Grades objects
+    * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage A storage holding \Inouit\InNews\Domain\Model\Category objects
     */
     public function getCategories() {
+        if($this->categories && intVal($this->categories)){
+          // $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
+          // $newsRepository = $objectManager->get('\Inouit\InNews\Domain\Repository\CategoryRepository');
+          // $this->categories = $newsRepository->findByNews($this);
+         
+        }
+       if ($this->categories instanceof \TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy) {
+          $this->categories->_loadRealInstance();
+        }
         return $this->categories;
     }
 
     /**
      * Sets the Categories
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories One or more Tx_Inannuaire_Domain_Model_Grades objects
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories One or more \Inouit\InNews\Domain\Model\Category objects
      * @return void
      */
     public function setCategories(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories) {
@@ -148,27 +208,27 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     /**
      * Add a Media
      *
-     * @param Tx_Inannuaire_Domain_Model_Grades $media
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $media
      * @return void
      */
-    public function addMedia(Tx_Inannuaire_Domain_Model_Grades $media) {
+    public function addMedia(\TYPO3\CMS\Extbase\Domain\Model\FileReference $media) {
         $this->media->attach($media);
     }
 
     /**
      * Remove a Media
      *
-     * @param Tx_Inannuaire_Domain_Model_Grades $mediaToRemove The Grades to be removed
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $mediaToRemove The Grades to be removed
      * @return void
      */
-    public function removeMedia(Tx_Inannuaire_Domain_Model_Grades $mediaToRemove) {
+    public function removeMedia(\TYPO3\CMS\Extbase\Domain\Model\FileReference $mediaToRemove) {
         $this->media->detach($mediaToRemove);
     }
 
     /**
     * Returns the Media
     *
-    * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage A storage holding Tx_Inannuaire_Domain_Model_Grades objects
+    * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage A storage holding \TYPO3\CMS\Extbase\Domain\Model\FileReference objects
     */
     public function getMedia() {
         return $this->media;
@@ -177,7 +237,7 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     /**
     * Returns the Media Not First
     *
-    * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage A storage holding Tx_Inannuaire_Domain_Model_Grades objects
+    * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage A storage holding \TYPO3\CMS\Extbase\Domain\Model\FileReference objects
     */
     public function getNotFirstMedia() {
         $medias = null;
@@ -197,7 +257,7 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     /**
     * Returns the Media
     *
-    * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage A storage holding Tx_Inannuaire_Domain_Model_Grades objects
+    * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage A storage holding \TYPO3\CMS\Extbase\Domain\Model\FileReference objects
     */
     public function getFirstMedia() {
         return count($this->media) ? $this->media->current() : null;
@@ -206,7 +266,7 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     /**
      * Sets the Media
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $media One or more Tx_Inannuaire_Domain_Model_Grades objects
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $media One or more \TYPO3\CMS\Extbase\Domain\Model\FileReference objects
      * @return void
      */
     public function setMedia(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $media) {
@@ -235,43 +295,43 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
         $this->title = $title;
     }
 
-	/**
-	 * Get creation date
-	 *
-	 * @return DateTime
-	 */
-	public function getCrdate() {
-		return $this->crdate;
-	}
+  /**
+   * Get creation date
+   *
+   * @return DateTime
+   */
+  public function getCrdate() {
+    return $this->crdate;
+  }
 
-	/**
-	 * Set Creation Date
-	 *
-	 * @param DateTime $crdate crdate
-	 * @return void
-	 */
-	public function setCrdate($crdate) {
-		$this->crdate = $crdate;
-	}
+  /**
+   * Set Creation Date
+   *
+   * @param DateTime $crdate crdate
+   * @return void
+   */
+  public function setCrdate($crdate) {
+    $this->crdate = $crdate;
+  }
 
-	/**
-	 * Get starttime
-	 *
-	 * @return DateTime
-	 */
-	public function getStarttime() {
-		return ($this->starttime!=0 ? $this->starttime : $this->crdate);
-	}
+  /**
+   * Get starttime
+   *
+   * @return DateTime
+   */
+  public function getStarttime() {
+    return ($this->starttime!=0 ? $this->starttime : $this->crdate);
+  }
 
-	/**
-	 * Set starttime
-	 *
-	 * @param DateTime $starttime starttime
-	 * @return void
-	 */
-	public function setStarttime($starttime) {
-		$this->starttime = $starttime;
-	}
+  /**
+   * Set starttime
+   *
+   * @param DateTime $starttime starttime
+   * @return void
+   */
+  public function setStarttime($starttime) {
+    $this->starttime = $starttime;
+  }
 
     /**
      * Getter for displayDate
@@ -339,43 +399,43 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
         $this->teaser = $teaser;
     }
 
-	/**
-	 * Get from date
-	 *
-	 * @return DateTime
-	 */
-	public function getFrom() {
-		return $this->from;
-	}
+  /**
+   * Get from date
+   *
+   * @return DateTime
+   */
+  public function getFrom() {
+    return $this->from;
+  }
 
-	/**
-	 * Set from date
-	 *
-	 * @param DateTime $from from
-	 * @return void
-	 */
-	public function setFrom($from) {
-		$this->from = $from;
-	}
+  /**
+   * Set from date
+   *
+   * @param DateTime $from from
+   * @return void
+   */
+  public function setFrom($from) {
+    $this->from = $from;
+  }
 
-	/**
-	 * Get to date
-	 *
-	 * @return DateTime
-	 */
-	public function getTo() {
-		return $this->to;
-	}
+  /**
+   * Get to date
+   *
+   * @return DateTime
+   */
+  public function getTo() {
+    return $this->to;
+  }
 
-	/**
-	 * Set to Date
-	 *
-	 * @param DateTime $to to
-	 * @return void
-	 */
-	public function setTo($to) {
-		$this->to = $to;
-	}
+  /**
+   * Set to Date
+   *
+   * @param DateTime $to to
+   * @return void
+   */
+  public function setTo($to) {
+    $this->to = $to;
+  }
 
     /**
      * Getter for further

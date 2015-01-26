@@ -30,6 +30,7 @@ if($matches && count($matches) > 1){
 			$GLOBALS['TYPO3_CONF_VARS']['BE']['defaultUserTSconfig'] = preg_replace( '/options.pageTree.doktypesToShowInNewPageDragArea = '.$subject.'/',
 				'options.pageTree.doktypesToShowInNewPageDragArea = '.implode(',', $doktypes),
 				$GLOBALS['TYPO3_CONF_VARS']['BE']['defaultUserTSconfig'] );
+			$inserted = true;
 		}
 	}
 }
@@ -60,4 +61,9 @@ if($extConf['hideNewsInPageTree']) {
 	}
 }
 
+
+// override Fluidtemplate
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\CMS\Frontend\ContentObject\FluidTemplateContentObject'] = array(
+	'className' => 'Inouit\InNews\Hooks\FluidTemplateContentObject'
+);
 ?>
