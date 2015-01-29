@@ -7,34 +7,6 @@ plugin.tx_innews {
   persistence {
     storagePid = {$plugin.tx_innews.persistence.storagePid}
     recursive = {$plugin.tx_innews.persistence.recursive}
-
-    classes{
-      Inouit\InNews\Domain\Model\News {
-        mapping {
-          tableName = pages
-          columns {
-            tx_innews_news_top.mapOnProperty = top
-            tx_innews_news_teaser.mapOnProperty = teaser
-            tx_innews_news_display_date.mapOnProperty = displayDate
-            tx_innews_event_from.mapOnProperty = from
-            tx_innews_event_to.mapOnProperty = to
-            tx_innews_event_further.mapOnProperty = further
-          }
-        }
-      }
-      Inouit\InNews\Domain\Model\Category {
-        mapping {
-          tableName = sys_category
-          columns {
-            title.mapOnProperty = title
-            tx_innews_category_list_page.mapOnProperty = listPage
-            parent.mapOnProperty = parent
-            items.mapOnProperty = items
-            tx_innews_category_frontend_hidden.mapOnProperty = frontendHidden
-          }
-        }
-      }
-    }
   }
   settings {
     orderBy = displayDate
@@ -64,6 +36,36 @@ plugin.tx_innews {
     images{
       width = 200
       height = 150m
+    }
+  }
+}
+
+config.tx_extbase.persistence{
+  classes{
+    Inouit\InNews\Domain\Model\News {
+      mapping {
+        tableName = pages
+        columns {
+          tx_innews_news_top.mapOnProperty = top
+          tx_innews_news_teaser.mapOnProperty = teaser
+          tx_innews_news_display_date.mapOnProperty = displayDate
+          tx_innews_event_from.mapOnProperty = from
+          tx_innews_event_to.mapOnProperty = to
+          tx_innews_event_further.mapOnProperty = further
+        }
+      }
+    }
+    Inouit\InNews\Domain\Model\Category {
+      mapping {
+        tableName = sys_category
+        columns {
+          title.mapOnProperty = title
+          tx_innews_category_list_page.mapOnProperty = listPage
+          parent.mapOnProperty = parent
+          items.mapOnProperty = items
+          tx_innews_category_frontend_hidden.mapOnProperty = frontendHidden
+        }
+      }
     }
   }
 }

@@ -64,7 +64,6 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     * List of categories
     *
     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Inouit\InNews\Domain\Model\Category>
-    * @lazy
     */
    protected $categories;
 
@@ -101,60 +100,9 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     /**
      * Constructs this post
      */
-    public function __construct() {
+    public function initializeObject() {
         $this->media = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->categories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-    }
-
-    /**
-     * Populate the object
-     *
-     * @param  array  $datas
-     * @return void
-     */
-    public function __populate(array $datas = array()) {
-      if(count($datas)){
-        if($datas['tx_innews_news_top']) {
-          $datas['top'] = $datas['tx_innews_news_top'];
-          unset($datas['tx_innews_news_top']);
-        }
-        if($datas['tx_innews_news_teaser']) {
-          $datas['teaser'] = $datas['tx_innews_news_teaser'];
-          unset($datas['tx_innews_news_teaser']);
-        }
-        if($datas['tx_innews_event_further']) {
-          $datas['further'] = $datas['tx_innews_event_further'];
-          unset($datas['tx_innews_event_further']);
-        }
-        if($datas['tx_innews_news_display_date']) {
-          $datas['displayDate'] = new \DateTime();
-          $datas['displayDate']->setTimestamp($datas['tx_innews_news_display_date']);
-          unset($datas['tx_innews_news_display_date']);
-        }
-        if($datas['tx_innews_event_from']) {
-          $datas['from'] = new \DateTime();
-          $datas['from']->setTimestamp($datas['tx_innews_event_from']);
-          unset($datas['tx_innews_event_from']);
-        }
-        if($datas['tx_innews_event_to']) {
-          $datas['to'] = new \DateTime();
-          $datas['to']->setTimestamp($datas['tx_innews_event_to']);
-          unset($datas['tx_innews_event_to']);
-        }
-        if($datas['categories']) {
-          $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
-          $datas['categories'] = $objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\LazyObjectStorage', $this, 'categories', $datas['categories']);
-        }
-        if($datas['media']) {
-          $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
-          $datas['media'] = $objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\LazyObjectStorage', $this, 'media', $datas['media']);
-        }
-        foreach($datas as $key=>$value){
-          $this->_setProperty($key, $value);
-        }
-      }
-
-      $this->__wakeup();
     }
 
     /**
@@ -183,16 +131,7 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage A storage holding \Inouit\InNews\Domain\Model\Category objects
     */
     public function getCategories() {
-        if($this->categories && intVal($this->categories)){
-          // $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
-          // $newsRepository = $objectManager->get('\Inouit\InNews\Domain\Repository\CategoryRepository');
-          // $this->categories = $newsRepository->findByNews($this);
-         
-        }
-       if ($this->categories instanceof \TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy) {
-          $this->categories->_loadRealInstance();
-        }
-        return $this->categories;
+      return $this->categories;
     }
 
     /**
