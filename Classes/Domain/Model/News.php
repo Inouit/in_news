@@ -68,6 +68,13 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
    protected $categories;
 
   /**
+   * user
+   * 
+   * @var TYPO3\CMS\Extbase\Domain\Model\BackendUser
+   */
+  protected $cruser;
+
+  /**
    * @var boolean
    */
   protected $top;
@@ -142,6 +149,27 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      */
     public function setCategories(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories) {
         $this->categories = $categories;
+    }
+
+    /**
+     * Getter for cruser
+     *
+     * @return TYPO3\CMS\Beuser\Domain\Model\BackendUser
+     */
+    public function getCruser() {
+        return $this->cruser;
+    }
+    
+    
+    /**
+     * Setter for cruser
+     *
+     * @param  TYPO3\CMS\Beuser\Domain\Model\BackendUser  cruser
+     * @return TYPO3\CMS\Beuser\Domain\Model\BackendUser
+     */
+    public function setCruser($cruser) {
+        $this->cruser = $cruser;
+        return $this;
     }
 
     /**

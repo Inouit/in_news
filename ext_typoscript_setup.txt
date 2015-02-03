@@ -52,6 +52,7 @@ config.tx_extbase.persistence{
           tx_innews_event_from.mapOnProperty = from
           tx_innews_event_to.mapOnProperty = to
           tx_innews_event_further.mapOnProperty = further
+          cruser_id.mapOnProperty = cruser
         }
       }
     }
