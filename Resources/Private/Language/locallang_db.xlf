@@ -46,6 +46,9 @@
 			<trans-unit id="tx_innews_event.further">
 				<source>Further informations</source>
 			</trans-unit>
+			<trans-unit id="tx_innews_event.geoloc">
+				<source>Geolocation (latitude,longitude)</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

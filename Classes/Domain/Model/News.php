@@ -82,190 +82,190 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
   /**
    * @var string
    */
-    protected $teaser;
+  protected $teaser;
 
   /**
    * @var DateTime
    */
-    protected $displayDate;
+  protected $displayDate;
 
   /**
    * @var DateTime
    */
-    protected $from;
+  protected $from;
 
   /**
    * @var DateTime
    */
-    protected $to;
+  protected $to;
 
-    /**
-     * @var string
-     */
-    protected $further;
+  /**
+   * @var string
+   */
+  protected $further;
 
-    /**
-     * @var string
-     */
-    protected $geoloc;
+  /**
+   * @var string
+   */
+  protected $geoloc;
 
-    /**
-     * Constructs this post
-     */
-    public function initializeObject() {
-        $this->media = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->categories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-    }
+  /**
+   * Constructs this post
+   */
+  public function initializeObject() {
+      $this->media = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+      $this->categories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+  }
 
-    /**
-     * Add a Category
-     *
-     * @param \Inouit\InNews\Domain\Model\Category $categories
-     * @return void
-     */
-    public function addCategories(\Inouit\InNews\Domain\Model\Category $categories) {
-        $this->categories->attach($categories);
-    }
+  /**
+   * Add a Category
+   *
+   * @param \Inouit\InNews\Domain\Model\Category $categories
+   * @return void
+   */
+  public function addCategories(\Inouit\InNews\Domain\Model\Category $categories) {
+      $this->categories->attach($categories);
+  }
 
-    /**
-     * Remove a Category
-     *
-     * @param \Inouit\InNews\Domain\Model\Category $categoriesToRemove The Grades to be removed
-     * @return void
-     */
-    public function removeCategories(\Inouit\InNews\Domain\Model\Category $categoriesToRemove) {
-        $this->categories->detach($categoriesToRemove);
-    }
+  /**
+   * Remove a Category
+   *
+   * @param \Inouit\InNews\Domain\Model\Category $categoriesToRemove The Grades to be removed
+   * @return void
+   */
+  public function removeCategories(\Inouit\InNews\Domain\Model\Category $categoriesToRemove) {
+      $this->categories->detach($categoriesToRemove);
+  }
 
-    /**
-    * Returns the Categories
-    *
-    * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage A storage holding \Inouit\InNews\Domain\Model\Category objects
-    */
-    public function getCategories() {
-      return $this->categories;
-    }
+  /**
+  * Returns the Categories
+  *
+  * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage A storage holding \Inouit\InNews\Domain\Model\Category objects
+  */
+  public function getCategories() {
+    return $this->categories;
+  }
 
-    /**
-     * Sets the Categories
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories One or more \Inouit\InNews\Domain\Model\Category objects
-     * @return void
-     */
-    public function setCategories(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories) {
-        $this->categories = $categories;
-    }
+  /**
+   * Sets the Categories
+   *
+   * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories One or more \Inouit\InNews\Domain\Model\Category objects
+   * @return void
+   */
+  public function setCategories(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories) {
+      $this->categories = $categories;
+  }
 
-    /**
-     * Getter for cruser
-     *
-     * @return TYPO3\CMS\Beuser\Domain\Model\BackendUser
-     */
-    public function getCruser() {
-        return $this->cruser;
-    }
-    
-    
-    /**
-     * Setter for cruser
-     *
-     * @param  TYPO3\CMS\Beuser\Domain\Model\BackendUser  cruser
-     * @return TYPO3\CMS\Beuser\Domain\Model\BackendUser
-     */
-    public function setCruser($cruser) {
-        $this->cruser = $cruser;
-        return $this;
-    }
+  /**
+   * Getter for cruser
+   *
+   * @return TYPO3\CMS\Beuser\Domain\Model\BackendUser
+   */
+  public function getCruser() {
+      return $this->cruser;
+  }
+  
+  
+  /**
+   * Setter for cruser
+   *
+   * @param  TYPO3\CMS\Beuser\Domain\Model\BackendUser  cruser
+   * @return TYPO3\CMS\Beuser\Domain\Model\BackendUser
+   */
+  public function setCruser($cruser) {
+      $this->cruser = $cruser;
+      return $this;
+  }
 
-    /**
-     * Add a Media
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $media
-     * @return void
-     */
-    public function addMedia(\TYPO3\CMS\Extbase\Domain\Model\FileReference $media) {
-        $this->media->attach($media);
-    }
+  /**
+   * Add a Media
+   *
+   * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $media
+   * @return void
+   */
+  public function addMedia(\TYPO3\CMS\Extbase\Domain\Model\FileReference $media) {
+      $this->media->attach($media);
+  }
 
-    /**
-     * Remove a Media
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $mediaToRemove The Grades to be removed
-     * @return void
-     */
-    public function removeMedia(\TYPO3\CMS\Extbase\Domain\Model\FileReference $mediaToRemove) {
-        $this->media->detach($mediaToRemove);
-    }
+  /**
+   * Remove a Media
+   *
+   * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $mediaToRemove The Grades to be removed
+   * @return void
+   */
+  public function removeMedia(\TYPO3\CMS\Extbase\Domain\Model\FileReference $mediaToRemove) {
+      $this->media->detach($mediaToRemove);
+  }
 
-    /**
-    * Returns the Media
-    *
-    * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage A storage holding \TYPO3\CMS\Extbase\Domain\Model\FileReference objects
-    */
-    public function getMedia() {
-        return $this->media;
-    }
+  /**
+  * Returns the Media
+  *
+  * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage A storage holding \TYPO3\CMS\Extbase\Domain\Model\FileReference objects
+  */
+  public function getMedia() {
+      return $this->media;
+  }
 
-    /**
-    * Returns the Media Not First
-    *
-    * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage A storage holding \TYPO3\CMS\Extbase\Domain\Model\FileReference objects
-    */
-    public function getNotFirstMedia() {
-        $medias = null;
-        if (count($this->media)){
-            $cpt = 0;
-            foreach ($this->media as $key => $media) {
-                if ($cpt){
-                    $medias[$key] = $media;
-                }else{
-                    $cpt = 1;
-                }
-            }
-        }
-        return $medias;
-    }
+  /**
+  * Returns the Media Not First
+  *
+  * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage A storage holding \TYPO3\CMS\Extbase\Domain\Model\FileReference objects
+  */
+  public function getNotFirstMedia() {
+      $medias = null;
+      if (count($this->media)){
+          $cpt = 0;
+          foreach ($this->media as $key => $media) {
+              if ($cpt){
+                  $medias[$key] = $media;
+              }else{
+                  $cpt = 1;
+              }
+          }
+      }
+      return $medias;
+  }
 
-    /**
-    * Returns the Media
-    *
-    * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage A storage holding \TYPO3\CMS\Extbase\Domain\Model\FileReference objects
-    */
-    public function getFirstMedia() {
-        return count($this->media) ? $this->media->current() : null;
-    }
+  /**
+  * Returns the Media
+  *
+  * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage A storage holding \TYPO3\CMS\Extbase\Domain\Model\FileReference objects
+  */
+  public function getFirstMedia() {
+      return count($this->media) ? $this->media->current() : null;
+  }
 
-    /**
-     * Sets the Media
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $media One or more \TYPO3\CMS\Extbase\Domain\Model\FileReference objects
-     * @return void
-     */
-    public function setMedia(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $media) {
-        $this->media = $media;
-    }
+  /**
+   * Sets the Media
+   *
+   * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $media One or more \TYPO3\CMS\Extbase\Domain\Model\FileReference objects
+   * @return void
+   */
+  public function setMedia(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $media) {
+      $this->media = $media;
+  }
 
 
-    /**
-     * Getter for title
-     *
-     * @return mixed
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
+  /**
+   * Getter for title
+   *
+   * @return mixed
+   */
+  public function getTitle()
+  {
+      return $this->title;
+  }
 
-    /**
-     * Setter for title
-     *
-     * @param mixed $title Value to set
-     * @return self
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
+  /**
+   * Setter for title
+   *
+   * @param mixed $title Value to set
+   * @return self
+   */
+  public function setTitle($title)
+  {
+      $this->title = $title;
+  }
 
   /**
    * Get creation date
@@ -305,71 +305,66 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     $this->starttime = $starttime;
   }
 
-    /**
-     * Getter for displayDate
-     *
-     * @return DateTime
-     */
-    public function getDisplayDate() {
-
-        return $this->displayDate;
-    }
-
-
-    /**
-     * Setter for displayDate
-     *
-     * @param  DateTime  displayDate
-     * @return DateTime
-     */
-    public function setDisplayDate($displayDate) {
-        $this->displayDate = $displayDate;
-        return $this;
-    }
-
-    /**
-     * Getter for top
-     *
-     * @return is
-     */
-    public function isTop() {
-        return $this->top;
-    }
+  /**
+   * Getter for displayDate
+   *
+   * @return DateTime
+   */
+  public function getDisplayDate() {
+    return $this->displayDate;
+  }
 
 
-    /**
-     * Setter for top
-     *
-     * @param  is  top
-     * @return is
-     */
-    public function setTop($top) {
-        $this->top = $top;
-        return $this;
-    }
+  /**
+   * Setter for displayDate
+   *
+   * @param  DateTime  displayDate
+   * @return DateTime
+   */
+  public function setDisplayDate($displayDate) {
+    $this->displayDate = $displayDate;
+    return $this;
+  }
+
+  /**
+   * Getter for top
+   *
+   * @return is
+   */
+  public function isTop() {
+    return $this->top;
+  }
 
 
+  /**
+   * Setter for top
+   *
+   * @param  is  top
+   * @return is
+   */
+  public function setTop($top) {
+    $this->top = $top;
+    return $this;
+  }
 
-    /**
-     * Getter for teaser
-     *
-     * @return mixed
-     */
-    public function getTeaser()
-    {
-        return $this->teaser;
-    }
+  /**
+   * Getter for teaser
+   *
+   * @return mixed
+   */
+  public function getTeaser() {
+    return $this->teaser;
+  }
 
-    /**
-     * Setter for teaser
-     *
-     * @param mixed $teaser Value to set
-     * @return self
-     */
-    public function setTeaser($teaser)
-    {
-        $this->teaser = $teaser;
-    }
+  /**
+   * Setter for teaser
+   *
+   * @param mixed $teaser Value to set
+   * @return self
+   */
+  public function setTeaser($teaser) {
+    $this->teaser = $teaser;
+  }
 
   /**
    * Get from date
@@ -409,64 +404,64 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     $this->to = $to;
   }
 
-    /**
-     * Getter for further
-     *
-     * @return string
-     */
-    public function getFurther() {
-        return $this->further;
-    }
+  /**
+   * Getter for further
+   *
+   * @return string
+   */
+  public function getFurther() {
+    return $this->further;
+  }
 
-    /**
-     * Setter for further
-     *
-     * @param  string  further
-     * @return string
-     */
-    public function setFurther($further) {
-        $this->further = $further;
-        return $this;
-    }
+  /**
+   * Setter for further
+   *
+   * @param  string  further
+   * @return string
+   */
+  public function setFurther($further) {
+    $this->further = $further;
+    return $this;
+  }
 
-    /**
-     * Getter for geoloc
-     *
-     * @return string
-     */
-    public function getGeoloc() {
-        return $this->geoloc;
-    }
-    
-    
-    /**
-     * Setter for geoloc
-     *
-     * @param  string  geoloc
-     * @return string
-     */
-    public function setGeoloc($geoloc) {
-        $this->geoloc = $geoloc;
-        return $this;
-    }
-    
+  /**
+   * Getter for geoloc
+   *
+   * @return string
+   */
+  public function getGeoloc() {
+    return $this->geoloc;
+  }
+  
+  
+  /**
+   * Setter for geoloc
+   *
+   * @param  string  geoloc
+   * @return string
+   */
+  public function setGeoloc($geoloc) {
+    $this->geoloc = $geoloc;
+    return $this;
+  }
+  
 
-    /**
-     * get Number Show Category
-     *
-     * @return boolean
-     */
-    public function getNbrShowCategories() {
-        $findShowCat = false;
-        if ($this->getCategories() && $this->getCategories()->count()){
-            foreach ($this->getCategories() as $categorie) {
-                if ( $categorie->getShowThisCat() ){
-                    $findShowCat = true;
-                }
+  /**
+   * get Number Show Category
+   *
+   * @return boolean
+   */
+  public function getNbrShowCategories() {
+    $findShowCat = false;
+    if ($this->getCategories() && $this->getCategories()->count()){
+        foreach ($this->getCategories() as $categorie) {
+            if ( $categorie->getShowThisCat() ){
+                $findShowCat = true;
             }
         }
-        return $findShowCat;
     }
+    return $findShowCat;
+  }
 
 }
 ?>

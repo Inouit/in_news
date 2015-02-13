@@ -58,6 +58,10 @@
 				<source>Further informations</source>
 				<target state="translated">Informations complémentaires</target>
 			</trans-unit>
+			<trans-unit id="tx_innews_event.geoloc" approved="yes">
+				<source>Geolocation (latitude,longitude)</source>
+				<target state="translated">Géolocalisation (latitude,longitude)</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

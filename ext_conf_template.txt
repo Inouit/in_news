@@ -1,5 +1,5 @@
 # cat=basic/int; type=boolean; label=LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:conf.hideNewsInPageTree
-hideNewsInPageTree = 1
+hideNewsInPageTree = 0
 
 # cat=basic/int; type=int; label=LLL:EXT:in_news/Resources/Private/Language/locallang_be.xlf:conf.newsDoktype
 newsDoktype = 180

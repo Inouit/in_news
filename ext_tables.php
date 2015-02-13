@@ -148,11 +148,21 @@ $tmp_in_news_columns = array(
             ),
         )
     ),
+    'tx_innews_event_geoloc' => array (
+        'exclude' => 1,
+        'label' => 'LLL:EXT:in_news/Resources/Private/Language/locallang_db.xlf:tx_innews_event.geoloc',
+        'displayCond' => 'FIELD:doktype:=:'.$newsDoktype,
+        'config'      => array (
+            'type'     => 'input',
+            'size'     => 20,
+            'max'      => 40,
+        )
+    ),
 );
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('pages',$tmp_in_news_columns);
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages',', --palette--;LLL:EXT:in_news/Resources/Private/Language/locallang_db.xlf:tx_innews_news.informations;newsInfos, --palette--;LLL:EXT:in_news/Resources/Private/Language/locallang_db.xlf:tx_innews_event.informations;eventInfos, tx_innews_event_further;;;richtext::rte_transform[flag=rte_disabled|mode=ts_css]', '', 'after:title');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages',', --palette--;LLL:EXT:in_news/Resources/Private/Language/locallang_db.xlf:tx_innews_news.informations;newsInfos, --palette--;LLL:EXT:in_news/Resources/Private/Language/locallang_db.xlf:tx_innews_event.informations;eventInfos, tx_innews_event_further;;;richtext::rte_transform[flag=rte_disabled|mode=ts_css], tx_innews_event_geoloc', '', 'after:title');
 
 $TCA['pages']['palettes']['newsInfos'] = array(
     'canNotCollapse' => 1,
