@@ -1,0 +1,22 @@
+<f:if condition="{item.geoloc}">
+  <script type="text/javascript"
+    src="https://maps.googleapis.com/maps/api/js">
+  </script>
+  <script type="text/javascript"><![CDATA[
+    function initialize() {
+      var myLatlng = new google.maps.LatLng(]]>{item.latitude}<![CDATA[,]]>{item.longitude}<![CDATA[);
+      var mapOptions = { 
+        center: myLatlng,
+        zoom: 12
+      };
+      var map = new google.maps.Map(document.getElementById('map-canvas-]]>{item.uid}<![CDATA['),
+          mapOptions);
+      var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map
+      });
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+  ]]></script>
+  <div id="map-canvas-{item.uid}" class="gmap"></div>
+</f:if>

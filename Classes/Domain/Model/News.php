@@ -432,7 +432,26 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
   public function getGeoloc() {
     return $this->geoloc;
   }
-  
+
+  /**
+   * Getter for latitude
+   *
+   * @return string
+   */
+  public function getLatitude() {
+    $coord = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $this->geoloc);
+    return $coord[0];
+  }
+
+  /**
+   * Getter for longitude
+   *
+   * @return string
+   */
+  public function getLongitude() {
+    $coord = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $this->geoloc);
+    return $coord[1];
+  }
   
   /**
    * Setter for geoloc
@@ -444,7 +463,6 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     $this->geoloc = $geoloc;
     return $this;
   }
-  
 
   /**
    * get Number Show Category
