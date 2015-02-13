@@ -105,6 +105,11 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     protected $further;
 
     /**
+     * @var string
+     */
+    protected $geoloc;
+
+    /**
      * Constructs this post
      */
     public function initializeObject() {
@@ -423,6 +428,28 @@ class News extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
         $this->further = $further;
         return $this;
     }
+
+    /**
+     * Getter for geoloc
+     *
+     * @return string
+     */
+    public function getGeoloc() {
+        return $this->geoloc;
+    }
+    
+    
+    /**
+     * Setter for geoloc
+     *
+     * @param  string  geoloc
+     * @return string
+     */
+    public function setGeoloc($geoloc) {
+        $this->geoloc = $geoloc;
+        return $this;
+    }
+    
 
     /**
      * get Number Show Category

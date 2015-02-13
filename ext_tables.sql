@@ -16,5 +16,6 @@ CREATE TABLE pages (
 
 	tx_innews_event_from int(11) DEFAULT '0' NOT NULL,
 	tx_innews_event_to int(11) DEFAULT '0' NOT NULL,
-	tx_innews_event_further text NOT NULL,
+  tx_innews_event_further text NOT NULL,
+	tx_innews_event_geoloc text NOT NULL,
 );
