@@ -4,11 +4,13 @@ _in_news_ is plugin for Typo3 to manage News as Pages.
 # Why using page
 Ok. that question is a good one. In fact, there's a [french debate](https://www.youtube.com/watch?v=D5AuZfrW_lY&index=16&list=PLnszbTENO-kXsPiTquOPpUwzNjOSv3OFI) which try to find a response. This plugin choose his side cause a lot of page's options should be native for news too : author, publication date, url rewriting, templating, advanced content layout, ...
 
- # The features
- ## Categories
+ # The features  
+ ## Categories  
  - display a list of categories in a tree view
 
- ## News
+
+ ## News  
+
  - display a list of news with some option:
    - filter only news related to categories (complex union are available)
    - highilighted news in first
