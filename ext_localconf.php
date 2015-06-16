@@ -3,6 +3,8 @@ if (!defined('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
+// the show plugin will be deprecated in version 1.0.0 so try to avoid this
+// prefer a fluid template page with "news" object to access news properties
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
 	'Inouit.' . $_EXTKEY,
 	'Pi1',
@@ -16,7 +18,6 @@ if (!defined('TYPO3_MODE')) {
 		'Category' => '',
 	)
 );
-
 
 // define top panel shorcut
 $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY]);

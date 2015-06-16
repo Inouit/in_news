@@ -27,7 +27,7 @@ if (TYPO3_MODE == 'BE') {
 $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY]);
 $newsDoktype = $extConf['newsDoktype'];
 
-// Pages TCA for category
+// TCA for category
 $tmp_in_news_category_columns = array(
     'tx_innews_category_list_page' => array (
         'exclude' => 0,
@@ -64,7 +64,7 @@ $tmp_in_news_category_columns = array(
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('sys_category','tx_innews_category_frontend_hidden', '', 'after:hidden');
 
 
-// Pages TCA for news
+// TCA for news
 $tmp_in_news_columns = array(
     'tx_innews_news_top' => array (
         'exclude' => 1,
@@ -172,7 +172,6 @@ $TCA['pages']['palettes']['eventInfos'] = array(
     'showitem' => ' tx_innews_event_from, tx_innews_event_to, --linebreak--,,');
 
 // News doktype
-// TYPO3\CMS\Core\Utility\GeneralUtility::loadTCA('pages');
 $newPageTypeOrder = 2;
 for($i=0; $i < $newPageTypeOrder; $i++) {
     $temp[$i] = $TCA['pages']['columns']['doktype']['config']['items'][$i];

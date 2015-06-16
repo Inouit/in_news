@@ -42,13 +42,13 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
 
 	/**
 	 * @var \TYPO3\CMS\Extbase\Persistence\QueryInterface Targeted categories
-   * @lazy 
+   * @lazy
 	 */
 	protected $targetedCategories;
 
   public function initializeObject() {
    $this->setDefaultQuerySettings($this->getQuerySettings());
-  } 
+  }
 
 	/**
 	 * Filter only news related to targeted categories
@@ -93,7 +93,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
 	}
 
 	/**
-	 * Find Recursive list
+	 * Find Recursive list of categories
 	 *
 	 * @param array $parent list of parent id
 	 * @param array $settings Typoscript settings
@@ -102,8 +102,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
 	public function findAllRecursivly($parent = 0, $settings) {
 		$query = $this->createQuery();
 
-
-		// MATCHING
+		// matching
 		if( $catsMatching =  $this->categoriesFilter($query, $settings) ){
 			$matching = array($catsMatching);
 		}else {
@@ -113,7 +112,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
 		// storage Pid
 		// $matching = array_push($matching, $query->in('pid', $this->getStoragePageIds()));
 		$query->matching($query->logicalAnd(array_push($matching, $query->in('pid', $this->getStoragePageIds()))));
-		
+
 		// order by
 		$query->setOrderings(array('sorting' => "ASC"));
 
@@ -121,7 +120,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
 	}
 
   /**
-   * find categories by news
+   * Find categories by news
    * @param  \Inouit\InNews\Domain\Model\News $news [description]
    * @return [type]                                [description]
    */
@@ -133,7 +132,8 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
   }
 
   /**
-   * get the storage page ids list depending on EXT settings
+   * Get query settings
+   * @return array
    */
   private function getQuerySettings() {
     $querySettings = $this->objectManager->get('\TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings');
@@ -153,7 +153,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
     $configurationPlugin = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
 
     $configuration['persistence.'] = array_merge($configuration['persistence.'], $configurationPlugin['persistence']);
-    
+
     $pids = trim($configuration['persistence.']['storagePid']) ? \TYPO3\CMS\Extbase\Utility\ArrayUtility::trimExplode(',', $configuration['persistence.']['storagePid']) : array($GLOBALS['TSFE']->id);
     $intAbs = function($item) {
       return abs(intVal(trim($item)));

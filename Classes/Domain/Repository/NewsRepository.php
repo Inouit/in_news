@@ -45,7 +45,7 @@ class NewsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	);
 
 	/**
-	 * Override default createQuery
+	 * Override default createQuery to match with the news doktype
 	 *
 	 * @return \TYPO3\CMS\Extbase\Persistence\QueryInterface
 	 * @api
@@ -67,6 +67,11 @@ class NewsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		return $query;
 	}
 
+	/**
+	 * Find all news
+	 * @param  string $orderDirection ASC or DESC
+	 * @return ArrayCollection
+	 */
 	public function findAll($orderDirection = null) {
 		$query = $this->createQuery();
 
@@ -116,11 +121,11 @@ class NewsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			$startdate = new \DateTime($settings['dateRange']['start']);
 			$enddate = clone($startdate);
 			$enddate->add(\DateInterval::createFromDateString($settings['dateRange']['duration']));
-			
+
 			$starttime = $startdate->getTimestamp();
 			$endtime = $enddate->getTimestamp();
 
-			array_push($matching, 
+			array_push($matching,
 				$query->logicalOr(
 					$query->logicalAnd(
 						$query->greaterThan('displayDate', 0),
@@ -195,6 +200,16 @@ class NewsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		}
 	}
 
+	/**
+	 * Filter categories with complex operation
+	 * @param  array $matching current constraints
+	 * @param  \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
+	 * @param  array $settings
+	 * @return array
+	 *
+	 * @example	targetedCategories can be separated by &
+	 * @example	3,8&12 will result to a filter (3 OR 8) AND 12
+	 */
 	protected function multiLevelFilter($matching, $query, $settings) {
 		$groups = explode('&', $settings['targetedCategories']);
 
@@ -213,6 +228,16 @@ class NewsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		return $matching;
 	}
 
+	/**
+	 * Filter categories with simple operation
+	 * @param  array $matching current constraints
+	 * @param  \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
+	 * @param  array $settings
+	 * @return array
+	 *
+	 * @example	targetedCategories can be separated by settings.targetedCategoriesUnion
+	 * @example	3,8,12 will result to a filter (3 OR|AND|ANY 8 OR|AND|ANY 12)
+	 */
 	protected function oneLevelFilter($matching, $query, $settings) {
 		if($cats = \TYPO3\CMS\Core\Utility\GeneralUtility::intExplode(',', $settings['targetedCategories'])) {
 			$matching2 = array();

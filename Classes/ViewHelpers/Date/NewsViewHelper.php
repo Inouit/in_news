@@ -11,7 +11,8 @@ class NewsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 
 
   /**
-  * Render the Date ViewHelper
+  * Render the Date ViewHelper (from|until|from to|the) <date>
+  *
   * @param  mixed $news targetted news
   * @param  mixed $news targetted news
   * @param  mixed $displayDate
@@ -70,7 +71,7 @@ class NewsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
                 $this->formatDate->render($to, $dateFormat)
                 ));
           }else {                                                                     // Different days
-            $content = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('date.fromTo', 
+            $content = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('date.fromTo',
               'in_news',
               array(
                 $this->formatDate->render($from, $dateFormat),

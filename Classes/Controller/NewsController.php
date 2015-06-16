@@ -51,12 +51,13 @@ class NewsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     protected $categoryRepository;
 
     /**
-     * listAction
+     * List news depending on settings and GET parameters
      *
      * @return void
      */
     public function listAction()
     {
+        // category argument override targetedCategories settings
         if ($this->request !== null) {
             $args = $this->request->getArguments();
             $categoryUid = $args['category'];
@@ -73,8 +74,9 @@ class NewsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     }
 
     /**
-     * action show
+     * Display a single news
      *
+     * @deprecated 1.0.0 We don't need this action anymore cause news properties are accesible via a "news" fluid object in news page
      * @return void
      */
     public function showAction() {

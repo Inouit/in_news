@@ -1,3 +1,4 @@
+# Display a tree of categories
 menu.newsCategories = USER
 menu.newsCategories {
   userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run

@@ -1,3 +1,4 @@
+# default style for news plugin
 plugin.tx_innews._CSS_DEFAULT_STYLE (
 
 	.tx-in-news { }

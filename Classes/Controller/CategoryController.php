@@ -30,7 +30,6 @@ namespace Inouit\InNews\Controller;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-
 class CategoryController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
     /**
@@ -42,7 +41,7 @@ class CategoryController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
     protected $categoryRepository;
 
     /**
-     * action list
+     * List of categories depending on settings
      *
      * @return void
      */
@@ -51,6 +50,5 @@ class CategoryController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
         $categories = $this->categoryRepository->findAllRecursivly(0, $this->settings);
         $this->view->assign('categories', $categories);
     }
-
 }
 ?>

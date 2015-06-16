@@ -53,11 +53,13 @@ class Category extends \TYPO3\CMS\Extbase\Domain\Model\Category {
 	protected $parent;
 
 	/**
+	 * Listing page for this category
 	 * @var integer
 	 */
 	protected $listPage;
 
 	/**
+	 * Display or hide in frontend
 	 * @var integer
 	 */
 	protected $frontendHidden;
