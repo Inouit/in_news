@@ -26,7 +26,7 @@ limit                      | int                                 |             |
 topFirst                   | boolean                             | 0           | display hightlighted news before others
 onlyTop                    | boolean                             | 0           | display only hightlighted news
 targetedCategories         | list of ids                         |             | display only news related to categories (you can add more complex filter like 1,2&8)
-targetedCategoriesUnion    | OR|AND|ANY                          | OR          | define the relation between targeted categories
+targetedCategoriesUnion    | OR&#124;AND&#124;ANY                          | OR          | define the relation between targeted categories
 excludePastEvents          | boolean                             | 0           | hide past news
 notDisplayedCategories     | list of ids                         |             | hide some categories in listing (the category filter still work)
 dateRange.start            | DateTime                            |             | start date of the range filter
