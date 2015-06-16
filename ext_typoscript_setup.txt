@@ -19,12 +19,11 @@ plugin.tx_innews {
     excludePastEvents = {$plugin.tx_innews.settings.excludePastEvents}
     notDisplayedCategories = {$plugin.tx_innews.settings.notDisplayedCategories}
 
-    #
     dateRange {
       # check available format for DateTime ( http://php.net/manual/fr/datetime.formats.relative.php )
-      start = 
+      start =
       # check available format for DateInterval ( http://php.net/manual/en/dateinterval.createfromdatestring.php )
-      duration = 
+      duration =
     }
 
     listPage = {$plugin.tx_innews.settings.listPage}
